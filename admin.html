@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="images/Logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+<title>Admin — Flight Plan</title>
+<meta name="description" content="Manage Flight Plan classes, appointment times, and signups.">
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap nav">
+    <a href="index.html" class="brand">
+      <img src="images/Logo.png" alt="Flight Plan logo" style="width:72px;height:72px;object-fit:contain;">
+      Flight Plan
+    </a>
+    <nav class="links" id="navLinks">
+      <a href="index.html#mission">Mission</a>
+      <a href="programs.html">Programs</a>
+      <a href="team.html">Team</a>
+      <a class="icon-btn" href="calendar.html" aria-label="Calendar">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="5" width="18" height="16" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M3 9.5H21" stroke="currentColor" stroke-width="1.6"/><path d="M8 3V6.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M16 3V6.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+      </a>
+      <span class="nav-auth" id="navAuth"></span>
+    </nav>
+    <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<main>
+  <section class="page-hero">
+    <div class="wrap">
+      <span class="eyebrow-tag">Admin</span>
+      <h1>Manage classes &amp; appointments</h1>
+      <p>Add classes, open up times for people to book, and see who's signed up. Calendar events are managed on the <a href="calendar.html" style="color:var(--cyan);">calendar page</a>.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="section-head">
+        <p class="kicker">Classes</p>
+        <h2>Classes people can sign up for</h2>
+      </div>
+
+      <div class="panel" style="margin-bottom:24px;">
+        <h3>Add a class</h3>
+        <div id="classMsg"></div>
+        <form id="classForm">
+          <div class="field">
+            <label for="className">Class name</label>
+            <input type="text" id="className" required>
+          </div>
+          <div class="field">
+            <label for="classDescription">Description</label>
+            <textarea id="classDescription" placeholder="What will kids do in this class?"></textarea>
+          </div>
+          <button type="submit" class="btn btn-flame">Add class</button>
+        </form>
+      </div>
+
+      <div class="data-list" id="classesList"><div class="empty-state">Loading…</div></div>
+    </div>
+  </section>
+
+  <section style="padding-top:0;">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="kicker">Appointment times</p>
+        <h2>Open times for booking</h2>
+      </div>
+
+      <div class="panel" style="margin-bottom:24px;">
+        <h3>Add a time slot</h3>
+        <div id="slotMsg"></div>
+        <form id="slotForm">
+          <div class="field">
+            <label for="slotClass">Class</label>
+            <select id="slotClass" required></select>
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label for="slotDate">Date</label>
+              <input type="date" id="slotDate" required>
+            </div>
+            <div class="field">
+              <label for="slotTime">Time</label>
+              <input type="text" id="slotTime" placeholder="e.g. 10:00 AM" required>
+            </div>
+          </div>
+          <div class="field">
+            <label for="slotCapacity">Capacity (spots available)</label>
+            <input type="number" id="slotCapacity" min="1" value="8" required>
+          </div>
+          <button type="submit" class="btn btn-flame">Add time slot</button>
+        </form>
+      </div>
+
+      <div class="data-list" id="slotsList"><div class="empty-state">Loading…</div></div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <a href="index.html" class="brand" style="margin-bottom:14px;">
+          <img src="images/Logo.png" alt="Flight Plan logo" style="width:72px;height:72px;object-fit:contain;">
+          Flight Plan
+        </a>
+        <p style="max-width:32ch;font-size:0.92rem;">A nonprofit teaching kids aerospace and engineering through hands-on building, one launch at a time.</p>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="index.html#mission">Mission</a></li>
+          <li><a href="programs.html">Programs</a></li>
+          <li><a href="team.html">Team</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:hello@flightplankids.org">hello@flightplankids.org</a></li>
+          <li>Portland, OR</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Flight Plan. All rights reserved.</span>
+      <span>EIN 00-0000000</span>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="assets/supabase-config.js"></script>
+<script src="assets/app.js"></script>
+<script>
+  const toggle = document.getElementById('menuToggle');
+  const links = document.getElementById('navLinks');
+  toggle.addEventListener('click', () => links.classList.toggle('open'));
+  links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => links.classList.remove('open')));
+
+  function formatDate(dateStr) {
+    const d = new Date(dateStr + 'T00:00:00');
+    return d.toLocaleDateString(undefined, { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' });
+  }
+
+  async function render() {
+    const classes = await FP.getClasses();
+    renderClasses(classes);
+    renderSlotClassOptions(classes);
+    const slots = await FP.getSlots();
+    renderSlots(classes, slots);
+  }
+
+  // ---- classes ----
+  function renderClasses(classes) {
+    const box = document.getElementById('classesList');
+    if (!classes.length) {
+      box.innerHTML = '<div class="empty-state">No classes yet — add one above.</div>';
+      return;
+    }
+    box.innerHTML = classes.map(c => `
+      <div class="data-row">
+        <div class="info">
+          <h4>${c.name}</h4>
+          <p>${c.description || 'No description yet.'}</p>
+        </div>
+        <div class="actions">
+          <button class="btn btn-danger btn-small" data-delete-class="${c.id}">Delete</button>
+        </div>
+      </div>
+    `).join('');
+    box.querySelectorAll('[data-delete-class]').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        if (confirm('Delete this class? Its time slots and signups will be removed too.')) {
+          await FP.deleteClass(btn.dataset.deleteClass);
+          render();
+        }
+      });
+    });
+  }
+
+  document.getElementById('classForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const name = document.getElementById('className').value.trim();
+    const description = document.getElementById('classDescription').value.trim();
+    if (!name) return;
+    const result = await FP.addClass({ name, description });
+    const msg = document.getElementById('classMsg');
+    if (!result.ok) { msg.innerHTML = '<div class="form-msg error">' + result.error + '</div>'; return; }
+    document.getElementById('classForm').reset();
+    msg.innerHTML = '<div class="form-msg success">Class added.</div>';
+    render();
+  });
+
+  // ---- slots ----
+  function renderSlotClassOptions(classes) {
+    const select = document.getElementById('slotClass');
+    if (!classes.length) {
+      select.innerHTML = '<option value="">Add a class first</option>';
+      return;
+    }
+    select.innerHTML = classes.map(c => `<option value="${c.id}">${c.name}</option>`).join('');
+  }
+
+  function renderSlots(classes, slots) {
+    const box = document.getElementById('slotsList');
+    const sorted = slots.slice().sort((a, b) => (a.date + a.time).localeCompare(b.date + b.time));
+    if (!sorted.length) {
+      box.innerHTML = '<div class="empty-state">No time slots yet — add one above.</div>';
+      return;
+    }
+    box.innerHTML = sorted.map(s => {
+      const cls = classes.find(c => c.id === s.class_id);
+      const className = cls ? cls.name : '(deleted class)';
+      const signups = s.bookings.length
+        ? '<ul>' + s.bookings.map(b => '<li>' + (b.profiles ? b.profiles.username : 'unknown user') + '</li>').join('') + '</ul>'
+        : '<p style="margin:4px 0 0;">No one signed up yet.</p>';
+      return `
+        <div class="data-row" style="flex-direction:column;align-items:stretch;">
+          <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;width:100%;">
+            <div class="info">
+              <h4>${className}</h4>
+              <p>${formatDate(s.date)} · ${s.time} · ${s.bookings.length}/${s.capacity} booked</p>
+            </div>
+            <div class="actions">
+              <button class="btn btn-danger btn-small" data-delete-slot="${s.id}">Delete</button>
+            </div>
+          </div>
+          <div class="signup-list"><strong>Signed up:</strong>${signups}</div>
+        </div>
+      `;
+    }).join('');
+    box.querySelectorAll('[data-delete-slot]').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        if (confirm('Delete this time slot? Anyone signed up will be removed from it.')) {
+          await FP.deleteSlot(btn.dataset.deleteSlot);
+          render();
+        }
+      });
+    });
+  }
+
+  document.getElementById('slotForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const classId = document.getElementById('slotClass').value;
+    const date = document.getElementById('slotDate').value;
+    const time = document.getElementById('slotTime').value.trim();
+    const capacity = document.getElementById('slotCapacity').value;
+    const msg = document.getElementById('slotMsg');
+    if (!classId) { msg.innerHTML = '<div class="form-msg error">Add a class before adding a time slot.</div>'; return; }
+    const result = await FP.addSlot({ classId, date, time, capacity });
+    if (!result.ok) { msg.innerHTML = '<div class="form-msg error">' + result.error + '</div>'; return; }
+    document.getElementById('slotForm').reset();
+    document.getElementById('slotCapacity').value = 8;
+    msg.innerHTML = '<div class="form-msg success">Time slot added.</div>';
+    render();
+  });
+
+  (async () => {
+    const session = await FP.requireAuth('admin');
+    if (!session) return;
+    FP.renderNavAuth('navAuth');
+    render();
+  })();
+</script>
+
+</body>
+</html>
