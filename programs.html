@@ -160,26 +160,6 @@
     font-size:0.85rem;color:rgba(20,33,61,0.55);display:flex;justify-content:space-between;
   }
 
-  /* ---------- GET INVOLVED ---------- */
-  .involved{background:var(--paper);}
-  .involved-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--line);border:1px solid var(--line);}
-  .involve-card{background:var(--paper);padding:38px;}
-  .involve-card h3{font-size:1.3rem;margin:0 0 12px;}
-  .involve-card p{color:rgba(20,33,61,0.72);margin:0 0 22px;}
-
-  /* ---------- DONATE BANNER ---------- */
-  .donate-band{
-    background:var(--navy);color:var(--paper);
-    padding:64px 0;position:relative;overflow:hidden;
-  }
-  .donate-band::before{
-    content:"";position:absolute;inset:0;
-    background-image:repeating-linear-gradient(45deg, rgba(79,179,217,0.06) 0 2px, transparent 2px 26px);
-  }
-  .donate-inner{position:relative;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;}
-  .donate-inner h2{margin:0 0 6px;color:var(--paper);}
-  .donate-inner p{margin:0;color:rgba(245,242,234,0.75);}
-
   /* ---------- FOOTER ---------- */
   footer{background:var(--navy-deep);color:rgba(245,242,234,0.7);padding:56px 0 28px;}
   .footer-grid{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:40px;margin-bottom:40px;}
@@ -209,7 +189,6 @@
     .hero-inner{padding:56px 0 64px;}
     .mission-grid{grid-template-columns:1fr;}
     .program-grid{grid-template-columns:1fr;}
-    .involved-grid{grid-template-columns:1fr;}
     .footer-grid{grid-template-columns:1fr;gap:28px;}
     section{padding:64px 0;}
   }
@@ -244,8 +223,7 @@
     <nav class="links" id="navLinks">
       <a href="index.html#mission">Mission</a>
       <a href="programs.html" style="opacity:1;font-weight:600;">Programs</a>
-      <a href="index.html#involved">Get Involved</a>
-      <a href="index.html#donate" class="btn btn-flame">Donate</a>
+      <a href="team.html">Team</a>
     </nav>
     <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
   </div>
@@ -337,15 +315,14 @@
           <img src="images/Logo.png" alt="Flight Plan logo" style="width:72px;height:72px;object-fit:contain;">
           Flight Plan
         </a>
-        <p style="max-width:32ch;font-size:0.92rem;">A 501(c)(3) nonprofit teaching kids aerospace and engineering through hands-on building, one launch at a time.</p>
+        <p style="max-width:32ch;font-size:0.92rem;">A nonprofit teaching kids aerospace and engineering through hands-on building, one launch at a time.</p>
       </div>
       <div>
         <h4>Explore</h4>
         <ul>
           <li><a href="index.html#mission">Mission</a></li>
           <li><a href="programs.html">Programs</a></li>
-          <li><a href="index.html#involved">Get involved</a></li>
-          <li><a href="index.html#donate">Donate</a></li>
+          <li><a href="team.html">Team</a></li>
         </ul>
       </div>
       <div>
