@@ -160,26 +160,6 @@
     font-size:0.85rem;color:rgba(20,33,61,0.55);display:flex;justify-content:space-between;
   }
 
-  /* ---------- GET INVOLVED ---------- */
-  .involved{background:var(--paper);}
-  .involved-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--line);border:1px solid var(--line);}
-  .involve-card{background:var(--paper);padding:38px;}
-  .involve-card h3{font-size:1.3rem;margin:0 0 12px;}
-  .involve-card p{color:rgba(20,33,61,0.72);margin:0 0 22px;}
-
-  /* ---------- DONATE BANNER ---------- */
-  .donate-band{
-    background:var(--navy);color:var(--paper);
-    padding:64px 0;position:relative;overflow:hidden;
-  }
-  .donate-band::before{
-    content:"";position:absolute;inset:0;
-    background-image:repeating-linear-gradient(45deg, rgba(79,179,217,0.06) 0 2px, transparent 2px 26px);
-  }
-  .donate-inner{position:relative;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;}
-  .donate-inner h2{margin:0 0 6px;color:var(--paper);}
-  .donate-inner p{margin:0;color:rgba(245,242,234,0.75);}
-
   /* ---------- FOOTER ---------- */
   footer{background:var(--navy-deep);color:rgba(245,242,234,0.7);padding:56px 0 28px;}
   .footer-grid{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:40px;margin-bottom:40px;}
@@ -209,7 +189,6 @@
     .hero-inner{padding:56px 0 64px;}
     .mission-grid{grid-template-columns:1fr;}
     .program-grid{grid-template-columns:1fr;}
-    .involved-grid{grid-template-columns:1fr;}
     .footer-grid{grid-template-columns:1fr;gap:28px;}
     section{padding:64px 0;}
   }
@@ -244,8 +223,7 @@
     <nav class="links" id="navLinks">
       <a href="index.html#mission" style="opacity:1;font-weight:600;">Mission</a>
       <a href="programs.html">Programs</a>
-      <a href="index.html#involved">Get Involved</a>
-      <a href="index.html#donate" class="btn btn-flame">Donate</a>
+      <a href="team.html">Team</a>
     </nav>
     <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
   </div>
@@ -259,7 +237,6 @@
       <p class="lede">Flight Plan runs a hands-on aerospace and engineering program at the Monroe Township Library, welcoming kids in grades 1–5 and taught by dedicated high school volunteers.</p>
       <div class="hero-ctas">
         <a href="programs.html" class="btn btn-flame">See our programs</a>
-        <a href="#donate" class="btn btn-outline-light">Support a launch</a>
       </div>
     </div>
   </section>
@@ -278,36 +255,6 @@
     </div>
   </section>
 
-  <section class="involved" id="involved">
-    <div class="wrap">
-      <div class="section-head">
-        <p class="kicker">Join in</p>
-        <h2>Two ways to help launch a kid's interest in engineering</h2>
-      </div>
-      <div class="involved-grid">
-        <div class="involve-card">
-          <h3>Volunteer</h3>
-          <p>High schoolers and mentors lead our sessions. No teaching experience required — we train you and provide every lesson plan.</p>
-          <a href="mailto:volunteer@flightplankids.org" class="btn btn-outline">Apply to volunteer</a>
-        </div>
-        <div class="involve-card">
-          <h3>Partner with us</h3>
-          <p>Bring Flight Plan to your library, school, or youth organization at no cost to families.</p>
-          <a href="mailto:programs@flightplankids.org" class="btn btn-outline">Start a partnership</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="donate-band" id="donate">
-    <div class="wrap donate-inner">
-      <div>
-        <h2>Fund the next launch</h2>
-        <p>$40 covers one kid's rocket kit for a full semester. $500 funds an entire Saturday build day.</p>
-      </div>
-      <a href="#" class="btn btn-flame">Donate now</a>
-    </div>
-  </section>
 </main>
 
 <footer>
@@ -325,7 +272,7 @@
         <ul>
           <li><a href="index.html#mission">Mission</a></li>
           <li><a href="programs.html">Programs</a></li>
-          <li><a href="index.html#donate">Donate</a></li>
+          <li><a href="team.html">Team</a></li>
         </ul>
       </div>
       <div>
