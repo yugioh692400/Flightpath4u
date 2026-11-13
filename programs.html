@@ -6,238 +6,28 @@
 <link rel="icon" type="image/png" href="images/Logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,700;0,800;0,900;1,900&family=Barlow:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
 <title>Programs — Flight Path</title>
 <meta name="description" content="Explore Flight Path's full hands-on aerospace and engineering curriculum for kids.">
-<style>
-  :root{
-    --navy:#0B1D3A;
-    --navy-deep:#081428;
-    --cyan:#4FB3D9;
-    --paper:#F5F2EA;
-    --ink:#14213D;
-    --flame:#E8743B;
-    --line:rgba(20,33,61,0.14);
-    --max:1120px;
-  }
-
-  *{box-sizing:border-box;}
-  html{scroll-behavior:smooth;}
-  body{
-    margin:0;
-    background:var(--paper);
-    color:var(--ink);
-    font-family:'Inter',system-ui,sans-serif;
-    line-height:1.55;
-    -webkit-font-smoothing:antialiased;
-  }
-  h1,h2,h3,.mono{
-    font-family:'Space Grotesk',system-ui,sans-serif;
-  }
-  img{max-width:100%;display:block;}
-  a{color:inherit;}
-  .wrap{max-width:var(--max);margin:0 auto;padding:0 28px;}
-
-  /* ---------- NAV ---------- */
-  header.site{
-    position:sticky;top:0;z-index:50;
-    background:var(--paper);
-    border-bottom:1px solid var(--line);
-  }
-  .nav{
-    display:flex;align-items:center;justify-content:space-between;
-    padding:18px 0;
-  }
-  .brand{
-    display:flex;align-items:center;gap:10px;
-    font-weight:700;font-size:1.25rem;letter-spacing:-0.01em;
-    text-decoration:none;color:var(--ink);
-  }
-  .brand svg{width:28px;height:28px;flex-shrink:0;}
-  nav.links{display:flex;gap:32px;align-items:center;}
-  nav.links a{
-    text-decoration:none;color:var(--ink);font-size:0.95rem;font-weight:500;
-    opacity:0.8;transition:opacity .15s ease;
-  }
-  nav.links a:hover{opacity:1;}
-  .btn{
-    display:inline-flex;align-items:center;justify-content:center;gap:8px;
-    padding:11px 22px;border-radius:3px;
-    font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:0.92rem;
-    text-decoration:none;border:1.5px solid transparent;cursor:pointer;
-    transition:transform .15s ease, background .15s ease, border-color .15s ease;
-  }
-  .btn:hover{transform:translateY(-1px);}
-  .btn-flame{background:var(--flame);color:#fff;}
-  .btn-flame:hover{background:#d3652c;}
-  .btn-outline{border-color:var(--ink);color:var(--ink);background:transparent;}
-  .btn-outline:hover{background:var(--ink);color:var(--paper);}
-  .btn-outline-light{border-color:rgba(245,242,234,0.55);color:var(--paper);background:transparent;}
-  .btn-outline-light:hover{background:var(--paper);color:var(--navy);}
-  .menu-toggle{display:none;background:none;border:none;cursor:pointer;padding:4px;}
-  .menu-toggle span{display:block;width:24px;height:2px;background:var(--ink);margin:5px 0;}
-  .icon-btn{
-    display:inline-flex;align-items:center;justify-content:center;
-    width:34px;height:34px;border-radius:3px;color:var(--ink);
-    opacity:0.75;transition:opacity .15s ease, background .15s ease;
-  }
-  .icon-btn:hover{opacity:1;background:rgba(20,33,61,0.06);}
-  .icon-btn svg{width:19px;height:19px;}
-  .nav-auth{display:flex;gap:16px;align-items:center;}
-  .nav-auth a{text-decoration:none;color:var(--ink);font-size:0.95rem;font-weight:600;opacity:0.85;}
-  .nav-auth a:hover{opacity:1;}
-
-  /* ---------- HERO ---------- */
-  .hero{
-    position:relative;overflow:hidden;
-    background:
-      linear-gradient(180deg, rgba(11,29,58,0.0), rgba(11,29,58,0.0)),
-      var(--navy);
-    color:var(--paper);
-  }
-  .hero::before{
-    content:"";position:absolute;inset:0;
-    background-image:
-      repeating-linear-gradient(0deg, rgba(79,179,217,0.14) 0 1px, transparent 1px 64px),
-      repeating-linear-gradient(90deg, rgba(79,179,217,0.14) 0 1px, transparent 1px 64px);
-    mask-image:radial-gradient(ellipse 90% 80% at 50% 0%, black 40%, transparent 90%);
-    pointer-events:none;
-  }
-  .hero::after{
-    content:"";position:absolute;inset:0;
-    background-image:url('images/Logo.png');
-    background-repeat:no-repeat;
-    background-position:center;
-    background-size:65% auto;
-    opacity:0.16;
-    z-index:0;
-    pointer-events:none;
-  }
-  .hero-inner{
-    position:relative;z-index:1;
-    max-width:640px;
-    padding:96px 0 104px;
-  }
-  .eyebrow-tag{
-    display:inline-flex;align-items:center;gap:8px;
-    font-family:'Space Grotesk',sans-serif;font-size:0.82rem;font-weight:500;
-    color:var(--cyan);border:1px solid rgba(79,179,217,0.4);
-    padding:5px 12px;border-radius:3px;margin-bottom:22px;
-  }
-  .hero h1{
-    font-size:clamp(2.3rem, 4.6vw, 3.6rem);
-    line-height:1.06;font-weight:700;letter-spacing:-0.015em;
-    margin:0 0 22px;max-width:14ch;
-  }
-  .hero p.lede{
-    font-size:1.12rem;color:rgba(245,242,234,0.82);max-width:46ch;margin:0 0 34px;
-  }
-  .hero-ctas{display:flex;gap:14px;flex-wrap:wrap;}
-
-
-  /* ---------- SECTION SHARED ---------- */
-  section{padding:88px 0;}
-  .section-head{max-width:56ch;margin-bottom:52px;}
-  .kicker{
-    font-family:'Space Grotesk',sans-serif;font-size:0.82rem;font-weight:600;
-    color:var(--flame);letter-spacing:0.02em;margin:0 0 12px;
-  }
-  h2{font-size:clamp(1.7rem,3vw,2.3rem);font-weight:700;letter-spacing:-0.01em;margin:0 0 16px;}
-  .section-head p{color:rgba(20,33,61,0.72);font-size:1.05rem;margin:0;}
-
-  /* ---------- MISSION / STATS ---------- */
-  .mission{background:var(--paper);border-bottom:1px solid var(--line);}
-  .mission-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:56px;align-items:start;}
-  .mission-copy p{font-size:1.08rem;color:rgba(20,33,61,0.82);margin:0 0 18px;}
-  .stat-list{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);}
-  .stat{background:var(--paper);padding:26px 22px;}
-  .stat .num{font-family:'Space Grotesk',sans-serif;font-size:2.1rem;font-weight:700;color:var(--navy);line-height:1;}
-  .stat .label{font-size:0.85rem;color:rgba(20,33,61,0.62);margin-top:8px;}
-
-  /* ---------- PROGRAMS ---------- */
-  .programs{background:#fff;border-bottom:1px solid var(--line);}
-  .program-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2px;background:var(--line);border:1px solid var(--line);}
-  .program{background:#fff;padding:32px;display:flex;flex-direction:column;gap:14px;}
-  .program-code{
-    font-family:'Space Grotesk',sans-serif;font-size:0.78rem;font-weight:600;
-    color:var(--cyan);background:rgba(79,179,217,0.12);
-    display:inline-block;padding:3px 9px;border-radius:2px;width:fit-content;
-  }
-  .program h3{font-size:1.2rem;margin:0;font-weight:600;}
-  .program p{margin:0;color:rgba(20,33,61,0.72);font-size:0.98rem;}
-  .program .meta{
-    margin-top:auto;padding-top:14px;border-top:1px solid var(--line);
-    font-size:0.85rem;color:rgba(20,33,61,0.55);display:flex;justify-content:space-between;
-  }
-
-  /* ---------- FOOTER ---------- */
-  footer{background:var(--navy-deep);color:rgba(245,242,234,0.7);padding:56px 0 28px;}
-  .footer-grid{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:40px;margin-bottom:40px;}
-  footer .brand{color:var(--paper);}
-  footer h4{
-    font-family:'Space Grotesk',sans-serif;color:var(--paper);font-size:0.9rem;
-    margin:0 0 14px;font-weight:600;
-  }
-  footer ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:9px;}
-  footer a{text-decoration:none;color:inherit;font-size:0.92rem;}
-  footer a:hover{color:var(--paper);}
-  .footer-bottom{
-    border-top:1px solid rgba(245,242,234,0.12);padding-top:22px;
-    display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
-    font-size:0.82rem;color:rgba(245,242,234,0.45);
-  }
-
-  /* ---------- RESPONSIVE ---------- */
-  @media (max-width: 880px){
-    nav.links{
-      position:fixed;inset:64px 0 0 0;background:var(--paper);
-      flex-direction:column;align-items:flex-start;padding:28px;gap:20px;
-      transform:translateX(100%);transition:transform .25s ease;
-    }
-    nav.links.open{transform:translateX(0);}
-    .menu-toggle{display:block;}
-    .hero-inner{padding:56px 0 64px;}
-    .mission-grid{grid-template-columns:1fr;}
-    .program-grid{grid-template-columns:1fr;}
-    .footer-grid{grid-template-columns:1fr;gap:28px;}
-    section{padding:64px 0;}
-  }
-  /* ---------- CURRICULUM (programs page) ---------- */
-  .challenge-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--line);border:1px solid var(--line);margin-bottom:56px;}
-  .challenge-card{background:#fff;padding:28px 32px;}
-  .challenge-card .kicker{margin-bottom:8px;}
-  .challenge-card h3{margin:0;font-size:1.15rem;font-weight:600;}
-  .curriculum-list{display:flex;flex-direction:column;gap:2px;background:var(--line);border:1px solid var(--line);}
-  .curriculum-item{background:#fff;padding:26px 32px;}
-  .curriculum-item h3{margin:0 0 10px;font-size:1.1rem;font-weight:600;}
-  .tag-list{display:flex;flex-wrap:wrap;gap:8px;}
-  .tag{
-    font-size:0.82rem;color:rgba(20,33,61,0.72);
-    background:rgba(20,33,61,0.05);border:1px solid var(--line);
-    padding:4px 10px;border-radius:2px;
-  }
-  @media (max-width:880px){
-    .challenge-grid{grid-template-columns:1fr;}
-  }
-
-</style>
 </head>
 <body>
 
 <header class="site">
   <div class="wrap nav">
     <a href="index.html" class="brand">
-      <img src="images/Logo.png" alt="Flight Path logo" style="width:72px;height:72px;object-fit:contain;">
-      Flight Path
+      <img src="images/Logo.png" alt="Flight Path logo">
+      <span>Flight <b>Path</b></span>
     </a>
     <nav class="links" id="navLinks">
       <a href="index.html#mission">Mission</a>
-      <a href="programs.html" style="opacity:1;font-weight:600;">Programs</a>
+      <a href="programs.html" class="active">Programs</a>
       <a href="team.html">Team</a>
       <a class="icon-btn" href="calendar.html" aria-label="Calendar">
         <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="5" width="18" height="16" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M3 9.5H21" stroke="currentColor" stroke-width="1.6"/><path d="M8 3V6.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M16 3V6.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
       </a>
-      <a class="btn btn-flame" href="challenge.html" style="padding:8px 16px;font-size:0.85rem;color:#fff;opacity:1;">Flight Challenge</a>
+      <a class="nav-pill" href="challenge.html" data-feature="challenge" hidden>Flight Challenge</a>
+      <a class="nav-pill cyan" href="community.html" data-feature="community" hidden>Flight Community</a>
       <span class="nav-auth" id="navAuth"></span>
     </nav>
     <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
@@ -245,77 +35,136 @@
 </header>
 
 <main>
-  <section class="programs" id="programs" style="border-bottom:none;padding-top:64px;">
+  <section class="programs lead" id="programs">
     <div class="wrap">
       <div class="section-head">
         <p class="kicker">What we run</p>
         <h2>A hands-on curriculum, start to finish</h2>
         <p>Kids don't just hear about engineering — they design, build, and test it. Here's what a season of Flight Path covers.</p>
       </div>
-
       <div class="challenge-grid">
         <div class="challenge-card">
-          <p class="kicker" style="margin-bottom:6px;">Challenge</p>
+          <p class="kicker">Challenge</p>
           <h3>Parachute Design Challenge</h3>
+          <p>Students design, build, and test a parachute of their own, then improve it based on how it performs.</p>
         </div>
         <div class="challenge-card">
-          <p class="kicker" style="margin-bottom:6px;">Challenge</p>
+          <p class="kicker">Challenge</p>
           <h3>Aircraft Design Challenge</h3>
+          <p>Students put everything they have learned to work designing, building, and testing an aircraft, then refine it based on how it flies.</p>
         </div>
       </div>
-
       <div class="curriculum-list">
         <div class="curriculum-item">
+          <span class="n">01</span>
           <h3>Foundations &amp; Workplace Safety</h3>
+          <p>Every build starts with safe habits. Students learn the shop rules and procedures they follow every session, get a first look at Newton's laws of motion, and practice the engineering design process: define a problem, imagine solutions, build, test, and improve.</p>
           <div class="tag-list"><span class="tag">Newton's laws</span><span class="tag">Shop rules &amp; procedure</span><span class="tag">Engineering design process</span></div>
         </div>
         <div class="curriculum-item">
+          <span class="n">02</span>
           <h3>Machines &amp; Tools</h3>
+          <p>Students get hands-on with the fasteners and hand tools real aircraft are built with. They learn how different rivets, screws, washers, and nuts and bolts hold parts together, and how deburring and filing leave clean, safe edges.</p>
           <div class="tag-list"><span class="tag">Rivets (flush, protruding, cherry, pull, machine head, manufactured head)</span><span class="tag">Screws</span><span class="tag">Washers</span><span class="tag">Nuts &amp; bolts</span><span class="tag">Deburring</span><span class="tag">Filing</span></div>
         </div>
         <div class="curriculum-item">
+          <span class="n">03</span>
           <h3>Aerodynamics &amp; Bernoulli's Principle</h3>
+          <p>How does air let something fly? Students explore how air pushes on objects, why airfoils are shaped the way they are, and how changes in air speed and pressure create lift. The Bernoulli equation and the different kinds of pressure are introduced step by step with simple demonstrations.</p>
           <div class="tag-list"><span class="tag">Impact forces</span><span class="tag">Airfoils</span><span class="tag">Fluid dynamics basics</span><span class="tag">Pressure–velocity relationship</span><span class="tag">The Bernoulli equation</span><span class="tag">Static, dynamic, hydrostatic &amp; stagnation pressure</span></div>
         </div>
         <div class="curriculum-item">
+          <span class="n">04</span>
           <h3>RC Planes</h3>
+          <p>Students learn what goes into building a radio-controlled plane. They compare balsa, wood, and foam to see how each material changes weight and strength, and find out why the center of gravity matters so much for a plane that flies steadily.</p>
           <div class="tag-list"><span class="tag">Balsa</span><span class="tag">Wood</span><span class="tag">Foam</span><span class="tag">Center of gravity</span></div>
         </div>
         <div class="curriculum-item">
+          <span class="n">05</span>
           <h3>Robotics &amp; Electronics</h3>
+          <p>Students build and program robots with VEX and learn the basics behind them: how circuits carry electricity, how wires connect the parts, and how soldering and welding join materials together.</p>
           <div class="tag-list"><span class="tag">VEX</span><span class="tag">Circuitry</span><span class="tag">Wires</span><span class="tag">Soldering</span><span class="tag">Welding</span></div>
         </div>
         <div class="curriculum-item">
+          <span class="n">06</span>
           <h3>Rockets</h3>
+          <p>Students design, build, and launch bottle rockets, learning how thrust pushes a rocket upward and what helps it fly straight. We also look at how real rockets work and, if the schedule allows, get a closer look at the real thing.</p>
           <div class="tag-list"><span class="tag">Bottle rockets</span><span class="tag">Real rockets (maybe!)</span></div>
         </div>
         <div class="curriculum-item">
+          <span class="n">07</span>
           <h3>Drones</h3>
+          <p>Students learn how drones fly and how their motors and propellers work together. Along the way they solve a fun puzzle: how a drone can turn, or yaw, without having a rudder.</p>
           <div class="tag-list"><span class="tag">How they work</span><span class="tag">How they yaw without a rudder</span></div>
         </div>
         <div class="curriculum-item">
+          <span class="n">08</span>
           <h3>Arduino &amp; Coding</h3>
+          <p>Students write code that makes hardware do things. Using C++, Python, and MATLAB, they program a small Arduino to read sensors and control motors and servos, and watch their code turn into real movement.</p>
           <div class="tag-list"><span class="tag">C++</span><span class="tag">Python</span><span class="tag">MATLAB</span><span class="tag">Arduino mini</span><span class="tag">Sensors</span><span class="tag">Motors &amp; servos</span></div>
         </div>
         <div class="curriculum-item">
+          <span class="n">09</span>
           <h3>Flight Simulation</h3>
+          <p>In Microsoft Flight Simulator, students take the controls of a virtual aircraft and practice what they have learned about lift, drag, and control surfaces without ever leaving the ground.</p>
           <div class="tag-list"><span class="tag">Microsoft Flight Simulator</span></div>
         </div>
         <div class="curriculum-item">
+          <span class="n">10</span>
           <h3>Forces of Flight &amp; Control Surfaces</h3>
+          <p>Every aircraft is a balance of four forces: lift, gravity, drag, and propulsion. Students learn how pilots steer using ailerons, flaps, elevators, slats, spoilers, the rudder, and trim tabs, and what each one does to the plane.</p>
           <div class="tag-list"><span class="tag">Drag</span><span class="tag">Lift</span><span class="tag">Gravity</span><span class="tag">Propulsion</span><span class="tag">Ailerons</span><span class="tag">Flaps</span><span class="tag">Elevators</span><span class="tag">Slats</span><span class="tag">Spoilers</span><span class="tag">Rudder</span><span class="tag">Trim tabs</span></div>
         </div>
         <div class="curriculum-item">
+          <span class="n">11</span>
           <h3>Engine Types</h3>
+          <p>Students compare how different jet engines make thrust, from turbines and turbojets to ramjets and scramjets, and learn why different engines are built for different speeds.</p>
           <div class="tag-list"><span class="tag">Turbine</span><span class="tag">Ramjet</span><span class="tag">Scramjet</span><span class="tag">Turbojet</span></div>
         </div>
         <div class="curriculum-item">
+          <span class="n">12</span>
           <h3>3D Design &amp; Testing</h3>
+          <p>Students design before they build. They model parts in Onshape and Blender, test rocket designs in OpenRocket, explore airflow in SimScale, and learn the slicer settings that turn a design into a 3D print.</p>
           <div class="tag-list"><span class="tag">OpenRocket</span><span class="tag">SimScale</span><span class="tag">Onshape</span><span class="tag">Blender</span><span class="tag">Slicer settings</span></div>
         </div>
         <div class="curriculum-item">
+          <span class="n">13</span>
           <h3>What's Next</h3>
+          <p>Flight Path doesn't end after the last session. Students hear about internships and get resources to keep exploring aerospace and engineering on their own.</p>
           <div class="tag-list"><span class="tag">Internships</span><span class="tag">Resources to go deeper</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="resources" id="links">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="kicker">What we teach</p>
+        <h2>Links &amp; resources</h2>
+        <p>Lesson materials, guides, and sign-ups. Some links are only open to certain accounts. Log in to see what you can open.</p>
+      </div>
+
+      <div class="link-grid" id="linkGrid"><div class="link-empty">Loading…</div></div>
+
+      <div class="link-admin" id="linkAdmin" hidden>
+        <h3>Add a link</h3>
+        <div id="linkMsg"></div>
+        <form id="linkForm">
+          <div class="lf"><label for="lTitle">Title</label><input type="text" id="lTitle" required></div>
+          <div class="lf"><label for="lUrl">Link (URL)</label><input type="url" id="lUrl" placeholder="https://…" required></div>
+          <div class="lf"><label for="lDesc">Description (optional)</label><textarea id="lDesc"></textarea></div>
+          <div class="lf">
+            <label>Who can open it?</label>
+            <div class="role-checks" id="lRoles"></div>
+            <p class="hint">Leave everything unchecked to let everyone open it, including visitors who aren't logged in. Admins can always open every link.</p>
+          </div>
+          <button type="submit" class="btn btn-flame">Add link</button>
+        </form>
+
+        <div class="link-manage">
+          <h4>Manage existing links</h4>
+          <div id="linkManage"></div>
         </div>
       </div>
     </div>
@@ -327,8 +176,8 @@
     <div class="footer-grid">
       <div>
         <a href="index.html" class="brand" style="margin-bottom:14px;">
-          <img src="images/Logo.png" alt="Flight Path logo" style="width:72px;height:72px;object-fit:contain;">
-          Flight Path
+          <img src="images/Logo.png" alt="Flight Path logo">
+          <span>Flight <b>Path</b></span>
         </a>
         <p style="max-width:32ch;font-size:0.92rem;">A nonprofit teaching kids aerospace and engineering through hands-on building, one launch at a time.</p>
       </div>
@@ -365,6 +214,110 @@
   links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => links.classList.remove('open')));
 
   FP.renderNavAuth('navAuth');
+
+  // ---------- links & resources ----------
+  (async () => {
+    const ROLES = ['student', 'parent', 'competitor', 'other'];
+    const LABEL = { student: 'Students', parent: 'Parents', competitor: 'Competitors', other: 'Other accounts' };
+    const esc = v => String(v == null ? '' : v).replace(/[&<>"']/g,
+      c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+    const safeUrl = u => /^https?:\/\//i.test(u || '') ? u : '';
+    const lockSvg = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>';
+    const access = l => l.allowed_roles.length ? l.allowed_roles.map(r => LABEL[r] || r).join(', ') : 'Everyone';
+
+    let me = null, links = [];
+
+    function msg(text, kind) {
+      let m = esc(text);
+      if (/relation|schema cache|does not exist|violates check/i.test(text)) {
+        m += ' (run roles-and-links.sql in your Supabase SQL Editor first)';
+      }
+      document.getElementById('linkMsg').innerHTML = '<div class="lmsg ' + kind + '">' + m + '</div>';
+    }
+
+    function roleChecks(selected, name) {
+      return ROLES.map(r =>
+        '<label><input type="checkbox" name="' + name + '" value="' + r + '"' +
+        (selected.includes(r) ? ' checked' : '') + '> ' + esc(LABEL[r]) + '</label>').join('');
+    }
+
+    function drawGrid() {
+      const grid = document.getElementById('linkGrid');
+      if (!links.length) {
+        grid.innerHTML = '<div class="link-empty">No links have been added yet.</div>';
+        return;
+      }
+      grid.innerHTML = links.map(l => {
+        const url = safeUrl(l.url);
+        const body = '<h3>' + esc(l.title) + '</h3>' + (l.description ? '<p>' + esc(l.description) + '</p>' : '');
+        if (url) {
+          return '<a class="link-card" href="' + esc(url) + '" target="_blank" rel="noopener noreferrer">' + body +
+            '<div class="foot"><span>' + esc(access(l)) + '</span><span class="open">Open link →</span></div></a>';
+        }
+        const why = me ? 'Only for ' + access(l) : 'Log in to open · for ' + access(l);
+        return '<div class="link-card locked" aria-disabled="true">' + body +
+          '<div class="foot"><span class="lock">' + lockSvg + esc(why) + '</span></div></div>';
+      }).join('');
+    }
+
+    function drawManage() {
+      const box = document.getElementById('linkManage');
+      if (!links.length) { box.innerHTML = '<p style="color:var(--muted);margin:12px 0 0;">Nothing to manage yet.</p>'; return; }
+      box.innerHTML = links.map(l =>
+        '<div class="lm-row" data-id="' + esc(l.id) + '"><div><div class="t">' + esc(l.title) + '</div>' +
+        '<div class="u">' + esc(l.url || '') + '</div></div>' +
+        '<div class="role-checks">' + roleChecks(l.allowed_roles, 'r-' + l.id) + '</div>' +
+        '<button class="btn btn-danger" data-del="' + esc(l.id) + '">Delete</button></div>'
+      ).join('');
+
+      box.querySelectorAll('.lm-row').forEach(row => {
+        const id = row.dataset.id;
+        row.querySelectorAll('input[type=checkbox]').forEach(cb => {
+          cb.addEventListener('change', async () => {
+            const roles = [...row.querySelectorAll('input[type=checkbox]:checked')].map(x => x.value);
+            const r = await FP.updateLinkRoles(id, roles);
+            if (!r.ok) { msg(r.error, 'err'); await load(); return; }
+            msg('Access updated.', 'ok');
+            await load();
+          });
+        });
+        row.querySelector('[data-del]').addEventListener('click', async () => {
+          if (!confirm('Delete this link?')) return;
+          const r = await FP.deleteLink(id);
+          if (!r.ok) { msg(r.error, 'err'); return; }
+          load();
+        });
+      });
+    }
+
+    async function load() {
+      try { links = await FP.getLinks(); } catch (e) { links = []; }
+      drawGrid();
+      if (me && me.role === 'admin') drawManage();
+    }
+
+    try { me = await FP.getSession(); } catch (e) { me = null; }
+    if (me && me.role === 'admin') {
+      document.getElementById('linkAdmin').hidden = false;
+      document.getElementById('lRoles').innerHTML = roleChecks([], 'newRole');
+      document.getElementById('linkForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const url = document.getElementById('lUrl').value.trim();
+        if (!safeUrl(url)) { msg('The link must start with http:// or https://', 'err'); return; }
+        const roles = [...document.querySelectorAll('#lRoles input:checked')].map(x => x.value);
+        const r = await FP.addLink({
+          title: document.getElementById('lTitle').value.trim(),
+          description: document.getElementById('lDesc').value.trim(),
+          url, allowedRoles: roles
+        });
+        if (!r.ok) { msg(r.error, 'err'); return; }
+        document.getElementById('linkForm').reset();
+        msg('Link added.', 'ok');
+        load();
+      });
+    }
+    load();
+  })();
 </script>
 
 </body>
