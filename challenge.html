@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="images/Logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800;900&family=Barlow:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<title>Flight Challenge — Flight Path</title>
+<meta name="description" content="The Flight Challenge: Flight Path's build-and-fly competition for kids in grades 1–5.">
+<style>
+  :root{
+    --bg:#060A14;
+    --panel:#0C1222;
+    --panel2:#101830;
+    --line:#1E2842;
+    --red:#FF2A3D;
+    --red-d:#d81f31;
+    --cyan:#4FB3D9;
+    --text:#F4F6FB;
+    --muted:#8A93AB;
+    --max:1120px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;background:var(--bg);color:var(--text);
+    font-family:'Barlow',system-ui,sans-serif;line-height:1.5;
+    -webkit-font-smoothing:antialiased;overflow-x:hidden;
+  }
+  h1,h2,h3{
+    font-family:'Barlow Condensed',sans-serif;text-transform:uppercase;
+    font-weight:900;margin:0;line-height:.9;letter-spacing:-.005em;
+  }
+  a{color:inherit;}
+  img{max-width:100%;display:block;}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 28px;}
+  .label{
+    display:flex;align-items:center;gap:10px;margin:0 0 18px;
+    font-weight:700;font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--cyan);
+  }
+  .label::before{content:"";width:3px;height:14px;background:var(--red);}
+  .mono{font-family:'IBM Plex Mono',monospace;text-transform:uppercase;letter-spacing:.08em;font-size:.75rem;}
+  .red{color:var(--red);}
+
+  /* ---------- HEADER ---------- */
+  header{
+    position:sticky;top:0;z-index:50;
+    background:rgba(6,10,20,.9);backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .bar{display:flex;align-items:center;justify-content:space-between;height:74px;gap:20px;}
+  .brand{display:flex;align-items:center;gap:12px;text-decoration:none;}
+  .brand img{width:50px;height:50px;object-fit:contain;}
+  .brand span{
+    font-family:'Barlow Condensed',sans-serif;font-weight:900;text-transform:uppercase;
+    font-size:1.5rem;letter-spacing:.01em;font-style:italic;
+  }
+  .brand b{color:var(--red);}
+  .menu{display:flex;gap:26px;}
+  .menu a{
+    text-decoration:none;font-weight:700;font-size:.72rem;letter-spacing:.16em;
+    text-transform:uppercase;color:#C8CEDF;transition:color .15s ease;
+  }
+  .menu a:hover{color:var(--red);}
+  .bar-right{display:flex;align-items:center;gap:18px;}
+  .btn-path{
+    display:inline-flex;align-items:center;gap:8px;padding:9px 16px;
+    border:1.5px solid var(--cyan);color:var(--cyan);text-decoration:none;
+    font-weight:700;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;
+    clip-path:polygon(0 0,calc(100% - 9px) 0,100% 9px,100% 100%,9px 100%,0 calc(100% - 9px));
+    transition:background .15s ease,color .15s ease;
+  }
+  .btn-path:hover{background:var(--cyan);color:#06101c;}
+  .auth{display:flex;align-items:center;gap:14px;}
+  .auth a,.auth .who{
+    font-weight:700;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;
+    text-decoration:none;color:var(--text);
+  }
+  .auth .who{color:var(--muted);}
+  .auth a:hover{color:var(--red);}
+
+  /* ---------- BUTTONS ---------- */
+  .btn{
+    display:inline-flex;align-items:center;gap:10px;padding:13px 22px;
+    font-weight:700;font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;
+    text-decoration:none;border:1.5px solid transparent;cursor:pointer;
+    font-family:'Barlow',sans-serif;border-radius:2px;
+    transition:background .15s ease,color .15s ease,border-color .15s ease,transform .15s ease;
+  }
+  .btn:hover{transform:translateY(-1px);}
+  .btn-red{background:var(--red);color:#fff;}
+  .btn-red:hover{background:var(--red-d);}
+  .btn-line{border-color:#3a4566;color:var(--text);background:transparent;}
+  .btn-line:hover{border-color:var(--text);}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;overflow:hidden;min-height:560px;
+    background:
+      radial-gradient(ellipse 55% 85% at 82% 25%,rgba(255,42,61,.22),transparent 62%),
+      linear-gradient(180deg,#0A1124 0%,#060A14 100%);
+    border-bottom:1px solid var(--line);
+  }
+  .beam{
+    position:absolute;top:-20%;width:140px;height:140%;pointer-events:none;
+    background:linear-gradient(180deg,rgba(255,42,61,.6),rgba(255,42,61,0) 70%);
+    filter:blur(22px);transform:rotate(20deg);
+  }
+  .beam.b1{right:14%;}
+  .beam.b2{right:2%;opacity:.55;width:90px;}
+  .skyline{position:absolute;left:0;right:0;bottom:0;height:46%;opacity:.9;pointer-events:none;}
+  .hero-grid{
+    position:relative;z-index:2;display:grid;grid-template-columns:1.05fr 1fr;gap:30px;
+    align-items:center;padding:84px 28px 96px;
+  }
+  .hero h1{font-size:clamp(4rem,9.5vw,8rem);}
+  .hero h1 span{display:block;}
+  .hero h1 .r{color:var(--red);}
+  .hero p.lede{color:#C4CADB;max-width:42ch;margin:26px 0 30px;font-size:1.02rem;}
+  .next-up{
+    display:none;margin:0 0 26px;padding:12px 16px;border:1px solid var(--line);
+    border-left:3px solid var(--red);background:rgba(12,18,34,.8);max-width:46ch;
+  }
+  .next-up.show{display:block;}
+  .next-up .t{font-weight:800;font-size:1.05rem;text-transform:uppercase;letter-spacing:.02em;}
+  .next-up .s{color:var(--muted);font-size:.88rem;}
+  .hero-ctas{display:flex;gap:12px;flex-wrap:wrap;}
+  .hero-art{position:relative;min-height:400px;display:grid;place-items:center;}
+  .ghost{
+    position:absolute;inset:0;display:grid;place-items:center;
+    font-family:'Barlow Condensed',sans-serif;font-weight:900;text-transform:uppercase;
+    font-size:clamp(8rem,17vw,15rem);line-height:1;color:transparent;
+    -webkit-text-stroke:2px rgba(244,246,251,.28);
+    user-select:none;
+  }
+  .hero-art svg{position:relative;width:min(100%,430px);height:auto;filter:drop-shadow(0 0 22px rgba(255,42,61,.35));}
+  .trail{animation:flow 6s linear infinite;}
+  @keyframes flow{to{stroke-dashoffset:-160;}}
+  .hero-foot{
+    position:absolute;left:0;right:0;bottom:16px;z-index:2;
+  }
+  .hero-foot .wrap{display:flex;justify-content:space-between;}
+  .hero-foot .mono{color:#cfd5e6;font-size:.66rem;font-weight:500;}
+
+  /* ---------- UPCOMING STRIP ---------- */
+  .upcoming{padding:38px 0 30px;border-bottom:1px solid var(--line);background:var(--bg);}
+  .up-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;}
+  .up-head .label{margin:0;}
+  .arrows{display:flex;gap:8px;}
+  .arrows button{
+    width:34px;height:34px;border-radius:50%;border:1px solid #3a4566;background:var(--panel);
+    color:var(--text);cursor:pointer;font-size:1rem;transition:border-color .15s ease;
+  }
+  .arrows button:hover{border-color:var(--red);}
+  .strip{
+    display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;
+    scrollbar-width:none;padding-bottom:4px;
+  }
+  .strip::-webkit-scrollbar{display:none;}
+  .race{
+    flex:0 0 min(300px,78vw);scroll-snap-align:start;position:relative;
+    background:linear-gradient(160deg,var(--panel2),var(--panel));
+    border:1px solid var(--line);padding:18px 18px 16px;display:flex;flex-direction:column;gap:8px;
+    transition:border-color .2s ease,transform .2s ease;
+  }
+  .race:hover{border-color:var(--red);transform:translateY(-3px);}
+  .race .date{
+    display:inline-flex;align-items:baseline;gap:8px;width:fit-content;
+    background:var(--red);color:#fff;padding:4px 10px;
+    font-family:'Barlow Condensed',sans-serif;font-weight:900;text-transform:uppercase;
+  }
+  .race .date b{font-size:1.5rem;line-height:1;}
+  .race .date span{font-size:.8rem;letter-spacing:.14em;}
+  .race h3{font-size:1.5rem;line-height:1;margin-top:4px;}
+  .race .loc{margin:0;color:var(--cyan);font-weight:700;font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;}
+  .race .desc{
+    margin:0;color:#aab2c8;font-size:.9rem;
+    display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;
+  }
+  .race .go{
+    margin-top:auto;padding-top:6px;color:var(--text);text-decoration:none;font-weight:700;
+    font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;
+  }
+  .race .go:hover{color:var(--red);}
+  .race.empty{border-style:dashed;align-items:flex-start;}
+  .race.empty h3{color:var(--muted);}
+
+  /* admin tools */
+  .admin-box{
+    margin-top:30px;border:1px solid var(--line);border-top:3px solid var(--red);
+    background:var(--panel);padding:26px;
+  }
+  .admin-box h3{font-size:1.6rem;margin-bottom:18px;}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+  .fld{margin-bottom:14px;}
+  .fld label{
+    display:block;margin-bottom:6px;font-weight:700;font-size:.68rem;
+    letter-spacing:.16em;text-transform:uppercase;color:var(--muted);
+  }
+  .fld input,.fld textarea{
+    width:100%;padding:11px 12px;background:var(--bg);border:1px solid var(--line);
+    color:var(--text);font-family:'Barlow',sans-serif;font-size:.95rem;border-radius:2px;
+  }
+  .fld input:focus,.fld textarea:focus{outline:none;border-color:var(--cyan);}
+  .fld textarea{min-height:80px;resize:vertical;}
+  .msg{padding:10px 12px;margin-bottom:14px;font-size:.9rem;border-left:3px solid;}
+  .msg.err{background:rgba(255,42,61,.1);border-color:var(--red);color:#ffb3bb;}
+  .msg.ok{background:rgba(79,179,217,.1);border-color:var(--cyan);color:#bfe6f5;}
+  .manage{margin-top:26px;border-top:1px solid var(--line);padding-top:18px;}
+  .manage-row{
+    display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;
+    padding:12px 0;border-bottom:1px solid var(--line);
+  }
+  .manage-row:last-child{border-bottom:none;}
+  .manage-row b{font-weight:700;}
+  .manage-row span{color:var(--muted);font-size:.88rem;}
+  .btn-del{border-color:#6b2530;color:#ff7d8a;background:transparent;padding:8px 14px;}
+  .btn-del:hover{background:var(--red);color:#fff;border-color:var(--red);}
+
+  /* ---------- FEATURE TRIO ---------- */
+  .features{padding:34px 0;border-bottom:1px solid var(--line);}
+  .trio{display:grid;grid-template-columns:1.7fr 1fr 1fr;gap:12px;}
+  .feat{
+    position:relative;min-height:280px;overflow:hidden;display:flex;flex-direction:column;
+    justify-content:flex-end;padding:22px;border:1px solid var(--line);
+    transition:border-color .2s ease;
+  }
+  .feat:hover{border-color:var(--red);}
+  .feat.f1{background:linear-gradient(150deg,#1b1330 0%,#0c1222 55%),radial-gradient(circle at 80% 20%,rgba(255,42,61,.4),transparent 55%);background-blend-mode:normal;}
+  .feat.f2{background:linear-gradient(160deg,#0f2338,#0a1020);}
+  .feat.f3{background:linear-gradient(160deg,#2a1020,#0a1020);}
+  .feat::before{
+    content:"";position:absolute;inset:0;
+    background:repeating-linear-gradient(115deg,transparent 0 26px,rgba(255,255,255,.035) 26px 27px);
+  }
+  .feat .bignum{
+    position:absolute;top:6px;right:16px;font-family:'Barlow Condensed',sans-serif;font-weight:900;
+    font-size:9rem;line-height:1;color:transparent;-webkit-text-stroke:1.5px rgba(255,255,255,.2);
+  }
+  .feat .tag{
+    position:relative;display:inline-block;width:fit-content;margin-bottom:10px;
+    background:var(--red);color:#fff;padding:3px 9px;font-weight:700;font-size:.62rem;
+    letter-spacing:.18em;text-transform:uppercase;
+  }
+  .feat h3{position:relative;font-size:2rem;margin-bottom:8px;}
+  .feat p{position:relative;margin:0;color:#c1c8dc;font-size:.92rem;max-width:34ch;}
+
+  /* ---------- COMMUNITY ---------- */
+  .community{padding:78px 0;border-bottom:1px solid var(--line);background:linear-gradient(180deg,#080d1b,#060A14);}
+  .com-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:40px;align-items:center;}
+  .community h2{font-size:clamp(2.8rem,6.4vw,5rem);margin-bottom:22px;}
+  .community p{color:#b6bdd1;max-width:46ch;margin:0 0 26px;}
+  .logo-stage{
+    position:relative;display:grid;place-items:center;min-height:300px;
+  }
+  .logo-stage::before{
+    content:"";position:absolute;width:300px;height:300px;border-radius:50%;
+    background:radial-gradient(circle,rgba(255,42,61,.28),transparent 68%);
+  }
+  .logo-stage img{position:relative;width:210px;height:210px;object-fit:contain;}
+  .ring{
+    position:absolute;width:280px;height:280px;border-radius:50%;border:1.5px dashed rgba(79,179,217,.45);
+    animation:spin 40s linear infinite;
+  }
+  @keyframes spin{to{transform:rotate(360deg);}}
+
+  /* ---------- GET FLYING ---------- */
+  .getflying{padding:78px 0;border-bottom:1px solid var(--line);}
+  .gf-grid{display:grid;grid-template-columns:1.1fr 1fr 1fr;gap:34px;align-items:end;}
+  .getflying h2{font-size:clamp(2.6rem,6vw,4.6rem);}
+  .gf-block{border-top:1px solid #3a4566;padding-top:16px;}
+  .gf-block .label{margin-bottom:10px;}
+  .gf-block h3{font-size:1.5rem;margin-bottom:10px;}
+  .gf-block p{margin:0 0 14px;color:#aab2c8;font-size:.92rem;}
+  .gf-block a{font-weight:700;font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--red);text-decoration:none;}
+  .gf-block a:hover{color:var(--text);}
+
+  /* ---------- PODIUM + PLAN ---------- */
+  .podium-sec,.plan{padding:78px 0;border-bottom:1px solid var(--line);}
+  .podium-sec{background:var(--panel);}
+  .sec-title{font-size:clamp(2.6rem,6vw,4.4rem);margin-bottom:40px;}
+  .podium{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;align-items:end;max-width:800px;}
+  .step{
+    background:var(--bg);border:1px solid var(--line);border-top:4px solid var(--muted);
+    padding:20px;display:flex;flex-direction:column;justify-content:space-between;
+  }
+  .step.p1{height:290px;border-top-color:var(--red);order:2;}
+  .step.p2{height:220px;order:1;}
+  .step.p3{height:170px;order:3;}
+  .step .place{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:4.4rem;line-height:.85;}
+  .step.p1 .place{color:var(--red);}
+  .step .who{color:var(--muted);}
+  .note{color:var(--muted);margin-top:22px;}
+  .timeline{display:grid;grid-template-columns:repeat(4,1fr);position:relative;}
+  .timeline::before{
+    content:"";position:absolute;left:0;right:0;top:11px;height:2px;
+    background:repeating-linear-gradient(90deg,var(--red) 0 10px,transparent 10px 20px);
+  }
+  .wp{position:relative;padding-top:42px;padding-right:20px;}
+  .wp::before{
+    content:"";position:absolute;left:0;top:0;width:24px;height:24px;background:var(--bg);
+    border:3px solid var(--cyan);transform:rotate(45deg) scale(.7);
+  }
+  .wp .code{color:var(--cyan);margin-bottom:8px;display:block;}
+  .wp h3{font-size:1.6rem;margin-bottom:6px;}
+  .wp p{margin:0;color:var(--muted);}
+
+  /* ---------- FOOTER ---------- */
+  footer{padding:34px 0;color:var(--muted);}
+  footer .row{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+  footer a{text-decoration:none;}
+  footer a:hover{color:var(--red);}
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width:900px){
+    .menu{display:none;}
+    .brand span{display:none;}
+    .bar-right{gap:12px;}
+    .hero-grid{grid-template-columns:1fr;padding:56px 28px 90px;}
+    .hero-art{min-height:300px;}
+    .trio{grid-template-columns:1fr;}
+    .com-grid{grid-template-columns:1fr;}
+    .gf-grid{grid-template-columns:1fr;align-items:start;}
+    .timeline{grid-template-columns:1fr;gap:28px;}
+    .timeline::before{left:11px;right:auto;top:0;bottom:0;width:2px;height:auto;
+      background:repeating-linear-gradient(180deg,var(--red) 0 10px,transparent 10px 20px);}
+    .wp{padding:0 0 0 48px;}
+    .grid2{grid-template-columns:1fr;}
+    .podium-sec,.plan,.community,.getflying{padding:56px 0;}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .trail,.ring{animation:none;}
+    html{scroll-behavior:auto;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap bar">
+    <a href="#top" class="brand">
+      <img src="images/Logo.png" alt="Flight Path logo">
+      <span>Flight <b>Challenge</b></span>
+    </a>
+    <nav class="menu">
+      <a href="#competitions">Competitions</a>
+      <a href="#events">Events</a>
+      <a href="#leaderboard">Leaderboard</a>
+      <a href="#plan">Timeline</a>
+    </nav>
+    <div class="bar-right">
+      <a href="index.html" class="btn-path">← Flight Path</a>
+      <div class="auth" id="fcAuth"><a href="login.html">Login</a></div>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+  <section class="hero">
+    <div class="beam b1"></div>
+    <div class="beam b2"></div>
+    <svg class="skyline" id="skyline" preserveAspectRatio="none" viewBox="0 0 1200 200" aria-hidden="true"></svg>
+    <div class="wrap hero-grid">
+      <div>
+        <p class="label">2026 Flight Challenge</p>
+        <h1><span>The sky</span><span class="r">is open.</span></h1>
+        <div class="next-up" id="nextUp">
+          <div class="t" id="nextUpTitle"></div>
+          <div class="s" id="nextUpSub"></div>
+        </div>
+        <p class="lede">Design an aircraft, test it, tune it, and send it up against everyone else. The Flight Challenge is where Flight Path kids put their builds to the test.</p>
+        <div class="hero-ctas">
+          <a class="btn btn-red" href="mailto:hello@flightplankids.org?subject=Flight%20Challenge">Register interest</a>
+          <a class="btn btn-line" href="#competitions">See competitions</a>
+        </div>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <div class="ghost">ACE?</div>
+        <svg viewBox="0 0 400 420" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path class="trail" d="M40 370 C 120 350, 130 200, 220 180 S 310 90, 345 56" stroke="#FF2A3D" stroke-width="5" stroke-linecap="round" stroke-dasharray="2 14"/>
+          <circle cx="40" cy="370" r="10" fill="#4FB3D9"/>
+          <circle cx="165" cy="268" r="8" fill="#4FB3D9"/>
+          <circle cx="262" cy="140" r="8" fill="#4FB3D9"/>
+          <path d="M0 0 L-34 12 L-12 14 L-7 32 L7 16 L34 -8 Z" fill="#F4F6FB" transform="translate(350 50) rotate(-18)"/>
+          <g font-family="IBM Plex Mono, monospace" font-size="13" fill="#F4F6FB" opacity=".85">
+            <text x="58" y="398">WP1 · BUILD</text>
+            <text x="184" y="284">WP2 · TEST</text>
+            <text x="100" y="146">WP3 · LAUNCH</text>
+          </g>
+        </svg>
+      </div>
+    </div>
+    <div class="hero-foot">
+      <div class="wrap">
+        <span class="mono">Monroe Township Library</span>
+        <span class="mono">Grades 1–5 · Taught by high schoolers</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="upcoming" id="competitions">
+    <div class="wrap">
+      <div class="up-head">
+        <p class="label">Upcoming competitions</p>
+        <div class="arrows">
+          <button type="button" id="stripPrev" aria-label="Scroll left">‹</button>
+          <button type="button" id="stripNext" aria-label="Scroll right">›</button>
+        </div>
+      </div>
+      <div class="strip" id="strip">
+        <article class="race empty"><h3>Loading…</h3></article>
+      </div>
+
+      <div class="admin-box" id="adminBox" hidden>
+        <p class="label">Admin</p>
+        <h3>Add a competition</h3>
+        <div id="compMsg"></div>
+        <form id="compForm">
+          <div class="grid2">
+            <div class="fld"><label for="cName">Name</label><input type="text" id="cName" required></div>
+            <div class="fld"><label for="cDate">Date</label><input type="date" id="cDate" required></div>
+          </div>
+          <div class="grid2">
+            <div class="fld"><label for="cLoc">Location</label><input type="text" id="cLoc" placeholder="e.g. Monroe Township Library"></div>
+            <div class="fld"><label for="cLink">Link (optional)</label><input type="url" id="cLink" placeholder="https://…"></div>
+          </div>
+          <div class="fld"><label for="cDesc">Description</label><textarea id="cDesc" placeholder="What is this competition about?"></textarea></div>
+          <button type="submit" class="btn btn-red">Add competition</button>
+        </form>
+        <div class="manage">
+          <p class="label">All competitions</p>
+          <div id="compManage"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="features" id="events">
+    <div class="wrap">
+      <div class="trio">
+        <article class="feat f1">
+          <span class="bignum">01</span>
+          <span class="tag">Event 01</span>
+          <h3>Distance Glide</h3>
+          <p>Build a glider and launch it. The flight that travels the farthest takes the event.</p>
+        </article>
+        <article class="feat f2">
+          <span class="bignum">02</span>
+          <span class="tag">Event 02</span>
+          <h3>Precision Landing</h3>
+          <p>Aim for the target. Closest touchdown wins.</p>
+        </article>
+        <article class="feat f3">
+          <span class="bignum">03</span>
+          <span class="tag">Event 03</span>
+          <h3>Hang Time</h3>
+          <p>Longest time aloft takes the podium.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="community">
+    <div class="wrap com-grid">
+      <div>
+        <p class="label">Built by high schoolers · flown by kids</p>
+        <h2>Where young<br>engineers<br><span class="red">take flight.</span></h2>
+        <p>The Flight Challenge turns everything kids learn in Flight Path sessions into a friendly, high-energy competition. Build it, test it, fly it, and see how far your design can go.</p>
+        <div class="hero-ctas">
+          <a class="btn btn-red" href="mailto:hello@flightplankids.org?subject=Flight%20Challenge">Register interest</a>
+          <a class="btn btn-line" href="mailto:hello@flightplankids.org?subject=Flight%20Challenge%20question">Ask a question</a>
+        </div>
+      </div>
+      <div class="logo-stage" aria-hidden="true">
+        <div class="ring"></div>
+        <img src="images/Logo.png" alt="">
+      </div>
+    </div>
+  </section>
+
+  <section class="getflying">
+    <div class="wrap gf-grid">
+      <h2>Everything you<br>need to <span class="red">get flying.</span></h2>
+      <div class="gf-block">
+        <p class="label">Competitors</p>
+        <h3>Find your next challenge</h3>
+        <p>See what's on the schedule and get ready to build.</p>
+        <a href="#competitions">Browse competitions →</a>
+      </div>
+      <div class="gf-block">
+        <p class="label">Organizers</p>
+        <h3>Bring it to your school</h3>
+        <p>Want to host a Flight Challenge near you? Get in touch.</p>
+        <a href="mailto:hello@flightplankids.org?subject=Host%20a%20Flight%20Challenge">Email us →</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="podium-sec" id="leaderboard">
+    <div class="wrap">
+      <p class="label">Leaderboard</p>
+      <h2 class="sec-title">The podium.</h2>
+      <div class="podium">
+        <div class="step p2"><div class="place">2</div><div class="mono who">To be decided</div></div>
+        <div class="step p1"><div class="place">1</div><div class="mono who">To be decided</div></div>
+        <div class="step p3"><div class="place">3</div><div class="mono who">To be decided</div></div>
+      </div>
+      <p class="mono note">Results post here after launch day.</p>
+    </div>
+  </section>
+
+  <section class="plan" id="plan">
+    <div class="wrap">
+      <p class="label">Timeline</p>
+      <h2 class="sec-title">Waypoints to<br>launch day.</h2>
+      <div class="timeline">
+        <div class="wp"><span class="mono code">WP1</span><h3>Registration</h3><p>Date TBA</p></div>
+        <div class="wp"><span class="mono code">WP2</span><h3>Build day</h3><p>Date TBA</p></div>
+        <div class="wp"><span class="mono code">WP3</span><h3>Launch day</h3><p>Date TBA</p></div>
+        <div class="wp"><span class="mono code">WP4</span><h3>Awards</h3><p>Date TBA</p></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap row">
+    <span class="mono">© 2026 Flight Path · Flight Challenge</span>
+    <a class="mono" href="mailto:hello@flightplankids.org">hello@flightplankids.org</a>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="assets/supabase-config.js"></script>
+<script src="assets/app.js"></script>
+<script>
+  // ---- skyline silhouette (decorative) ----
+  (function () {
+    const svg = document.getElementById('skyline');
+    let seed = 7, x = 0, out = '';
+    const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+    while (x < 1200) {
+      const w = 22 + rnd() * 44, h = 40 + rnd() * 150;
+      out += '<rect x="' + x.toFixed(1) + '" y="' + (200 - h).toFixed(1) + '" width="' + w.toFixed(1) +
+             '" height="' + h.toFixed(1) + '" fill="rgba(79,179,217,0.07)"/>';
+      if (rnd() > 0.65) out += '<rect x="' + (x + w / 2 - 1).toFixed(1) + '" y="' + (200 - h - 14).toFixed(1) +
+             '" width="2" height="14" fill="rgba(255,42,61,0.55)"/>';
+      x += w + 3 + rnd() * 5;
+    }
+    svg.innerHTML = out;
+  })();
+
+  // ---- helpers ----
+  const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g,
+    c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  const pad = n => String(n).padStart(2, '0');
+  const t = new Date();
+  const todayKey = t.getFullYear() + '-' + pad(t.getMonth() + 1) + '-' + pad(t.getDate());
+  const parse = d => new Date(d + 'T00:00:00');
+  const safeUrl = u => /^https?:\/\//i.test(u || '') ? u : '';
+
+  let isAdmin = false;
+  let comps = [];
+
+  // ---- render ----
+  function renderStrip() {
+    const strip = document.getElementById('strip');
+    const upcoming = comps.filter(c => c.date >= todayKey).sort((a, b) => a.date.localeCompare(b.date));
+
+    if (!upcoming.length) {
+      strip.innerHTML = '<article class="race empty"><h3>No competitions posted yet</h3>' +
+        '<p class="desc">Check back soon. New Flight Challenge dates will show up here.</p></article>';
+    } else {
+      strip.innerHTML = upcoming.map(c => {
+        const d = parse(c.date);
+        const url = safeUrl(c.link);
+        return '<article class="race">' +
+          '<div class="date"><b>' + d.getDate() + '</b><span>' + esc(d.toLocaleDateString('en-US', { month: 'short' })) + '</span></div>' +
+          '<h3>' + esc(c.name) + '</h3>' +
+          (c.location ? '<p class="loc">' + esc(c.location) + '</p>' : '') +
+          (c.description ? '<p class="desc">' + esc(c.description) + '</p>' : '') +
+          (url ? '<a class="go" href="' + esc(url) + '" target="_blank" rel="noopener">Details →</a>' : '') +
+          '</article>';
+      }).join('');
+    }
+
+    // hero "next up" callout
+    const box = document.getElementById('nextUp');
+    if (upcoming.length) {
+      const n = upcoming[0];
+      document.getElementById('nextUpTitle').textContent = 'Next up: ' + n.name;
+      document.getElementById('nextUpSub').textContent =
+        parse(n.date).toLocaleDateString(undefined, { weekday: 'long', month: 'long', day: 'numeric' }) +
+        (n.location ? ' · ' + n.location : '');
+      box.classList.add('show');
+    } else {
+      box.classList.remove('show');
+    }
+  }
+
+  function renderManage() {
+    if (!isAdmin) return;
+    const box = document.getElementById('compManage');
+    const sorted = comps.slice().sort((a, b) => a.date.localeCompare(b.date));
+    if (!sorted.length) {
+      box.innerHTML = '<p style="color:var(--muted);margin:0;">Nothing yet. Add your first competition above.</p>';
+      return;
+    }
+    box.innerHTML = sorted.map(c =>
+      '<div class="manage-row"><div><b>' + esc(c.name) + '</b><br><span>' +
+      esc(parse(c.date).toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' })) +
+      (c.location ? ' · ' + esc(c.location) : '') +
+      (c.date < todayKey ? ' · past' : '') + '</span></div>' +
+      '<button class="btn btn-del" data-del="' + esc(c.id) + '">Delete</button></div>'
+    ).join('');
+    box.querySelectorAll('[data-del]').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        if (!confirm('Delete this competition?')) return;
+        const r = await FP.deleteCompetition(btn.dataset.del);
+        if (!r.ok) { showMsg(r.error, 'err'); return; }
+        load();
+      });
+    });
+  }
+
+  function showMsg(text, kind) {
+    let m = esc(text);
+    if (/relation|schema cache|does not exist/i.test(text)) {
+      m += ' — run competitions.sql in your Supabase SQL Editor first.';
+    }
+    document.getElementById('compMsg').innerHTML = '<div class="msg ' + kind + '">' + m + '</div>';
+  }
+
+  async function load() {
+    try { comps = await FP.getCompetitions(); } catch (e) { comps = []; }
+    renderStrip();
+    renderManage();
+  }
+
+  // ---- strip arrows ----
+  document.getElementById('stripPrev').addEventListener('click', () =>
+    document.getElementById('strip').scrollBy({ left: -320, behavior: 'smooth' }));
+  document.getElementById('stripNext').addEventListener('click', () =>
+    document.getElementById('strip').scrollBy({ left: 320, behavior: 'smooth' }));
+
+  // ---- admin form ----
+  document.getElementById('compForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const link = document.getElementById('cLink').value.trim();
+    if (link && !safeUrl(link)) { showMsg('The link must start with http:// or https://', 'err'); return; }
+    const r = await FP.addCompetition({
+      name: document.getElementById('cName').value.trim(),
+      date: document.getElementById('cDate').value,
+      location: document.getElementById('cLoc').value.trim(),
+      description: document.getElementById('cDesc').value.trim(),
+      link
+    });
+    if (!r.ok) { showMsg(r.error, 'err'); return; }
+    document.getElementById('compForm').reset();
+    showMsg('Competition added.', 'ok');
+    load();
+  });
+
+  // ---- auth + startup ----
+  (async () => {
+    try {
+      const s = await FP.getSession();
+      if (s) {
+        const box = document.getElementById('fcAuth');
+        box.innerHTML = '';
+        const who = document.createElement('span');
+        who.className = 'who';
+        who.textContent = s.username;
+        const out = document.createElement('a');
+        out.href = '#';
+        out.textContent = 'Log out';
+        out.addEventListener('click', async (ev) => {
+          ev.preventDefault();
+          await FP.logout();
+          window.location.reload();
+        });
+        box.appendChild(who);
+        box.appendChild(out);
+        isAdmin = s.role === 'admin';
+        if (isAdmin) document.getElementById('adminBox').hidden = false;
+      }
+    } catch (e) { /* leave the default Login link */ }
+    load();
+  })();
+</script>
+
+</body>
+</html>
