@@ -63,6 +63,7 @@ const FP = (() => {
 
   // Fills a <span id="navAuth"> with Login, or with a home link + Log out.
   async function renderNavAuth(elId) {
+    applyFeatureNav();   // also shows/hides the Flight Challenge / Flight Community header buttons
     const el = document.getElementById(elId);
     if (!el) return;
     const s = await getSession();
@@ -157,11 +158,100 @@ const FP = (() => {
     return error ? { ok: false, error: error.message } : { ok: true };
   }
 
+  // ---- roles + role-restricted links ----
+  const ROLES = ['admin', 'student', 'parent', 'competitor', 'other'];
+
+  // Admin only: every account with email + role (the database returns nothing to non-admins).
+  async function listAccounts() {
+    const { data, error } = await sb.rpc('admin_list_users');
+    return error ? { ok: false, error: error.message, data: [] } : { ok: true, data: data || [] };
+  }
+  async function setRole(userId, role) {
+    if (!ROLES.includes(role)) return { ok: false, error: 'Unknown role.' };
+    const { data, error } = await sb.from('profiles').update({ role }).eq('id', userId).select();
+    if (error) return { ok: false, error: error.message };
+    if (!data || !data.length) return { ok: false, error: 'The role was not changed. Are you logged in as an admin?' };
+    return { ok: true };
+  }
+
+  // Each link comes back with `.url`, which is null when the signed-in user's role is not allowed to open it.
+  async function getLinks() {
+    const { data: links, error } = await sb.from('links').select('*').order('created_at');
+    if (error) return [];
+    const { data: urls } = await sb.from('link_urls').select('link_id, url');
+    const byId = {};
+    (urls || []).forEach(u => { byId[u.link_id] = u.url; });
+    return links.map(l => ({ ...l, url: byId[l.id] || null }));
+  }
+  async function addLink({ title, description, url, allowedRoles }) {
+    const { data, error } = await sb.from('links')
+      .insert({ title, description, allowed_roles: allowedRoles || [] }).select().single();
+    if (error) return { ok: false, error: error.message };
+    const { error: urlError } = await sb.from('link_urls').insert({ link_id: data.id, url });
+    if (urlError) {
+      await sb.from('links').delete().eq('id', data.id);
+      return { ok: false, error: urlError.message };
+    }
+    return { ok: true };
+  }
+  async function updateLinkRoles(id, allowedRoles) {
+    const { data, error } = await sb.from('links').update({ allowed_roles: allowedRoles }).eq('id', id).select();
+    if (error) return { ok: false, error: error.message };
+    if (!data || !data.length) return { ok: false, error: 'Nothing was changed. Are you logged in as an admin?' };
+    return { ok: true };
+  }
+  async function deleteLink(id) {
+    const { error } = await sb.from('links').delete().eq('id', id);
+    return error ? { ok: false, error: error.message } : { ok: true };
+  }
+
+  // ---- site features (admin can turn Flight Challenge / Flight Community on and off) ----
+  const FEATURE_DEFAULTS = { challenge_enabled: true, community_enabled: true };
+  async function getSettings() {
+    const settings = { ...FEATURE_DEFAULTS };
+    try {
+      const { data, error } = await sb.from('site_settings').select('key, value');
+      if (!error && data) data.forEach(r => { settings[r.key] = r.value === 'true'; });
+    } catch (e) { /* fall back to defaults (everything on) */ }
+    return settings;
+  }
+  async function setSetting(key, enabled) {
+    const { error } = await sb.from('site_settings')
+      .upsert({ key, value: enabled ? 'true' : 'false', updated_at: new Date().toISOString() });
+    return error ? { ok: false, error: error.message } : { ok: true };
+  }
+  // Shows or hides any header button marked data-feature="challenge" / "community".
+  async function applyFeatureNav() {
+    const st = await getSettings();
+    document.querySelectorAll('[data-feature]').forEach(el => {
+      el.hidden = !st[el.dataset.feature + '_enabled'];
+    });
+    return st;
+  }
+
+  // ---- community meetups ----
+  async function getMeetups() {
+    const { data, error } = await sb.from('meetups').select('*').order('date');
+    return error ? [] : data;
+  }
+  async function addMeetup({ name, date, location, description, link }) {
+    const { error } = await sb.from('meetups').insert({ name, date, location, description, link });
+    return error ? { ok: false, error: error.message } : { ok: true };
+  }
+  async function deleteMeetup(id) {
+    const { error } = await sb.from('meetups').delete().eq('id', id);
+    return error ? { ok: false, error: error.message } : { ok: true };
+  }
+
   return {
     getSession, signUp, login, logout, requireAuth, renderNavAuth,
     getClasses, addClass, deleteClass,
     getSlots, addSlot, deleteSlot, bookSlot, cancelBooking,
     getEvents, addEvent, deleteEvent,
-    getCompetitions, addCompetition, deleteCompetition
+    getCompetitions, addCompetition, deleteCompetition,
+    ROLES, listAccounts, setRole,
+    getLinks, addLink, updateLinkRoles, deleteLink,
+    getSettings, setSetting, applyFeatureNav,
+    getMeetups, addMeetup, deleteMeetup
   };
 })();
