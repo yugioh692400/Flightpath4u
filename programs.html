@@ -7,8 +7,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<title>What we teach — FlightPath</title>
-<meta name="description" content="Explore FlightPath's full hands-on aerospace and engineering curriculum for kids.">
+<title>Programs — Flight Path</title>
+<meta name="description" content="Explore Flight Path's full hands-on aerospace and engineering curriculum for kids.">
 <style>
   :root{
     --navy:#0B1D3A;
@@ -219,15 +219,6 @@
   @media (max-width:880px){
     .challenge-grid{grid-template-columns:1fr;}
   }
-  a.challenge-card, a.curriculum-item{
-    text-decoration:none;color:inherit;display:block;cursor:pointer;
-    transition:background .15s ease;
-  }
-  a.challenge-card:hover, a.curriculum-item:hover{background:rgba(79,179,217,0.06);}
-  .item-date{
-    display:inline-block;font-family:'Space Grotesk',sans-serif;font-size:0.78rem;font-weight:600;
-    color:#1a5a73;background:rgba(79,179,217,0.14);padding:3px 10px;border-radius:20px;margin-bottom:10px;
-  }
 
 </style>
 </head>
@@ -236,16 +227,17 @@
 <header class="site">
   <div class="wrap nav">
     <a href="index.html" class="brand">
-      <img src="images/Logo.png" alt="FlightPath logo" style="width:72px;height:72px;object-fit:contain;">
-      FlightPath
+      <img src="images/Logo.png" alt="Flight Path logo" style="width:72px;height:72px;object-fit:contain;">
+      Flight Path
     </a>
     <nav class="links" id="navLinks">
       <a href="index.html#mission">Mission</a>
+      <a href="programs.html" style="opacity:1;font-weight:600;">Programs</a>
       <a href="team.html">Team</a>
-      <a href="programs.html" style="opacity:1;font-weight:600;">What we teach</a>
       <a class="icon-btn" href="calendar.html" aria-label="Calendar">
         <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="5" width="18" height="16" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M3 9.5H21" stroke="currentColor" stroke-width="1.6"/><path d="M8 3V6.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M16 3V6.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
       </a>
+      <a class="btn btn-flame" href="challenge.html" style="padding:8px 16px;font-size:0.85rem;color:#fff;opacity:1;">Flight Challenge</a>
       <span class="nav-auth" id="navAuth"></span>
     </nav>
     <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
@@ -258,12 +250,74 @@
       <div class="section-head">
         <p class="kicker">What we run</p>
         <h2>A hands-on curriculum, start to finish</h2>
-        <p>Kids don't just hear about engineering — they design, build, and test it. Here's what a season of FlightPath covers.</p>
+        <p>Kids don't just hear about engineering — they design, build, and test it. Here's what a season of Flight Path covers.</p>
       </div>
 
-      <div class="challenge-grid" id="challengeGrid"><div class="empty-state">Loading…</div></div>
+      <div class="challenge-grid">
+        <div class="challenge-card">
+          <p class="kicker" style="margin-bottom:6px;">Challenge</p>
+          <h3>Parachute Design Challenge</h3>
+        </div>
+        <div class="challenge-card">
+          <p class="kicker" style="margin-bottom:6px;">Challenge</p>
+          <h3>Aircraft Design Challenge</h3>
+        </div>
+      </div>
 
-      <div class="curriculum-list" id="curriculumList"><div class="empty-state">Loading…</div></div>
+      <div class="curriculum-list">
+        <div class="curriculum-item">
+          <h3>Foundations &amp; Workplace Safety</h3>
+          <div class="tag-list"><span class="tag">Newton's laws</span><span class="tag">Shop rules &amp; procedure</span><span class="tag">Engineering design process</span></div>
+        </div>
+        <div class="curriculum-item">
+          <h3>Machines &amp; Tools</h3>
+          <div class="tag-list"><span class="tag">Rivets (flush, protruding, cherry, pull, machine head, manufactured head)</span><span class="tag">Screws</span><span class="tag">Washers</span><span class="tag">Nuts &amp; bolts</span><span class="tag">Deburring</span><span class="tag">Filing</span></div>
+        </div>
+        <div class="curriculum-item">
+          <h3>Aerodynamics &amp; Bernoulli's Principle</h3>
+          <div class="tag-list"><span class="tag">Impact forces</span><span class="tag">Airfoils</span><span class="tag">Fluid dynamics basics</span><span class="tag">Pressure–velocity relationship</span><span class="tag">The Bernoulli equation</span><span class="tag">Static, dynamic, hydrostatic &amp; stagnation pressure</span></div>
+        </div>
+        <div class="curriculum-item">
+          <h3>RC Planes</h3>
+          <div class="tag-list"><span class="tag">Balsa</span><span class="tag">Wood</span><span class="tag">Foam</span><span class="tag">Center of gravity</span></div>
+        </div>
+        <div class="curriculum-item">
+          <h3>Robotics &amp; Electronics</h3>
+          <div class="tag-list"><span class="tag">VEX</span><span class="tag">Circuitry</span><span class="tag">Wires</span><span class="tag">Soldering</span><span class="tag">Welding</span></div>
+        </div>
+        <div class="curriculum-item">
+          <h3>Rockets</h3>
+          <div class="tag-list"><span class="tag">Bottle rockets</span><span class="tag">Real rockets (maybe!)</span></div>
+        </div>
+        <div class="curriculum-item">
+          <h3>Drones</h3>
+          <div class="tag-list"><span class="tag">How they work</span><span class="tag">How they yaw without a rudder</span></div>
+        </div>
+        <div class="curriculum-item">
+          <h3>Arduino &amp; Coding</h3>
+          <div class="tag-list"><span class="tag">C++</span><span class="tag">Python</span><span class="tag">MATLAB</span><span class="tag">Arduino mini</span><span class="tag">Sensors</span><span class="tag">Motors &amp; servos</span></div>
+        </div>
+        <div class="curriculum-item">
+          <h3>Flight Simulation</h3>
+          <div class="tag-list"><span class="tag">Microsoft Flight Simulator</span></div>
+        </div>
+        <div class="curriculum-item">
+          <h3>Forces of Flight &amp; Control Surfaces</h3>
+          <div class="tag-list"><span class="tag">Drag</span><span class="tag">Lift</span><span class="tag">Gravity</span><span class="tag">Propulsion</span><span class="tag">Ailerons</span><span class="tag">Flaps</span><span class="tag">Elevators</span><span class="tag">Slats</span><span class="tag">Spoilers</span><span class="tag">Rudder</span><span class="tag">Trim tabs</span></div>
+        </div>
+        <div class="curriculum-item">
+          <h3>Engine Types</h3>
+          <div class="tag-list"><span class="tag">Turbine</span><span class="tag">Ramjet</span><span class="tag">Scramjet</span><span class="tag">Turbojet</span></div>
+        </div>
+        <div class="curriculum-item">
+          <h3>3D Design &amp; Testing</h3>
+          <div class="tag-list"><span class="tag">OpenRocket</span><span class="tag">SimScale</span><span class="tag">Onshape</span><span class="tag">Blender</span><span class="tag">Slicer settings</span></div>
+        </div>
+        <div class="curriculum-item">
+          <h3>What's Next</h3>
+          <div class="tag-list"><span class="tag">Internships</span><span class="tag">Resources to go deeper</span></div>
+        </div>
+      </div>
     </div>
   </section>
 </main>
@@ -273,8 +327,8 @@
     <div class="footer-grid">
       <div>
         <a href="index.html" class="brand" style="margin-bottom:14px;">
-          <img src="images/Logo.png" alt="FlightPath logo" style="width:72px;height:72px;object-fit:contain;">
-          FlightPath
+          <img src="images/Logo.png" alt="Flight Path logo" style="width:72px;height:72px;object-fit:contain;">
+          Flight Path
         </a>
         <p style="max-width:32ch;font-size:0.92rem;">A nonprofit teaching kids aerospace and engineering through hands-on building, one launch at a time.</p>
       </div>
@@ -282,20 +336,20 @@
         <h4>Explore</h4>
         <ul>
           <li><a href="index.html#mission">Mission</a></li>
+          <li><a href="programs.html">Programs</a></li>
           <li><a href="team.html">Team</a></li>
-          <li><a href="programs.html">What we teach</a></li>
         </ul>
       </div>
       <div>
         <h4>Contact</h4>
         <ul>
-          <li><a href="mailto:support@flightpath4u.com">support@flightpath4u.com</a></li>
-          <li>Monroe Township, NJ</li>
+          <li><a href="mailto:hello@flightplankids.org">hello@flightplankids.org</a></li>
+          <li>Portland, OR</li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
-      <span>© 2026 FlightPath. All rights reserved.</span>
+      <span>© 2026 Flight Path. All rights reserved.</span>
       <span>EIN 00-0000000</span>
     </div>
   </div>
@@ -311,62 +365,6 @@
   links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => links.classList.remove('open')));
 
   FP.renderNavAuth('navAuth');
-
-  function formatItemDate(dateStr) {
-    if (!dateStr) return '';
-    const d = new Date(dateStr + 'T00:00:00');
-    return d.toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' });
-  }
-
-  function renderChallenges(items) {
-    const box = document.getElementById('challengeGrid');
-    const challenges = items.filter(i => i.kind === 'challenge');
-    if (!challenges.length) {
-      box.innerHTML = '<div class="empty-state">Nothing here yet.</div>';
-      return;
-    }
-    box.innerHTML = challenges.map(c => {
-      const tag = c.link ? 'a' : 'div';
-      const hrefAttr = c.link ? `href="${c.link}" target="_blank" rel="noopener"` : '';
-      const dateHtml = c.event_date ? `<p class="item-date">${formatItemDate(c.event_date)}</p>` : '';
-      return `
-        <${tag} class="challenge-card" ${hrefAttr}>
-          <p class="kicker" style="margin-bottom:6px;">Challenge</p>
-          ${dateHtml}
-          <h3>${c.title}</h3>
-        </${tag}>
-      `;
-    }).join('');
-  }
-
-  function renderCurriculum(items) {
-    const box = document.getElementById('curriculumList');
-    const list = items.filter(i => i.kind === 'item');
-    if (!list.length) {
-      box.innerHTML = '<div class="empty-state">Nothing here yet.</div>';
-      return;
-    }
-    box.innerHTML = list.map(i => {
-      const tag = i.link ? 'a' : 'div';
-      const hrefAttr = i.link ? `href="${i.link}" target="_blank" rel="noopener"` : '';
-      const dateHtml = i.event_date ? `<p class="item-date">${formatItemDate(i.event_date)}</p>` : '';
-      const tags = (i.tags || '').split('|').map(t => t.trim()).filter(Boolean);
-      const tagsHtml = tags.length ? `<div class="tag-list">${tags.map(t => `<span class="tag">${t}</span>`).join('')}</div>` : '';
-      return `
-        <${tag} class="curriculum-item" ${hrefAttr}>
-          ${dateHtml}
-          <h3>${i.title}</h3>
-          ${tagsHtml}
-        </${tag}>
-      `;
-    }).join('');
-  }
-
-  (async () => {
-    const items = await FP.getCurriculumItems();
-    renderChallenges(items);
-    renderCurriculum(items);
-  })();
 </script>
 
 </body>
