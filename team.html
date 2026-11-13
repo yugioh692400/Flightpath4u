@@ -7,8 +7,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<title>Team — FlightPath</title>
-<meta name="description" content="Meet the core team behind FlightPath's hands-on aerospace and engineering program for kids.">
+<title>Team — Flight Plan</title>
+<meta name="description" content="Meet the core team behind Flight Plan's hands-on aerospace and engineering program for kids.">
 <style>
   :root{
     --navy:#0B1D3A;
@@ -19,7 +19,6 @@
     --flame:#E8743B;
     --line:rgba(20,33,61,0.14);
     --max:1120px;
-    --header-h:109px;
   }
 
   *{box-sizing:border-box;}
@@ -117,7 +116,7 @@
   .hero-inner{
     position:relative;z-index:1;
     max-width:640px;
-    padding:80px 0 84px;
+    padding:96px 0 104px;
   }
   .eyebrow-tag{
     display:inline-flex;align-items:center;gap:8px;
@@ -131,108 +130,42 @@
     margin:0 0 22px;max-width:14ch;
   }
   .hero p.lede{
-    font-size:1.12rem;color:rgba(245,242,234,0.82);max-width:46ch;margin:0 0 0;
+    font-size:1.12rem;color:rgba(245,242,234,0.82);max-width:46ch;margin:0 0 34px;
   }
 
   /* ---------- SECTION SHARED ---------- */
+  section{padding:88px 0;}
+  .section-head{max-width:56ch;margin-bottom:52px;}
   .kicker{
     font-family:'Space Grotesk',sans-serif;font-size:0.82rem;font-weight:600;
     color:var(--flame);letter-spacing:0.02em;margin:0 0 12px;
   }
   h2{font-size:clamp(1.7rem,3vw,2.3rem);font-weight:700;letter-spacing:-0.01em;margin:0 0 16px;}
+  .section-head p{color:rgba(20,33,61,0.72);font-size:1.05rem;margin:0;}
 
-  /* ---------- TEAM INTRO ---------- */
-  .team-intro{background:#fff;border-bottom:1px solid var(--line);padding:56px 0;}
-  .team-intro .section-head{max-width:56ch;}
-  .team-intro p{color:rgba(20,33,61,0.72);font-size:1.02rem;margin:0;}
-  .team-intro .scroll-note{
-    display:flex;align-items:center;gap:8px;margin-top:18px;
-    font-family:'Space Grotesk',sans-serif;font-size:0.85rem;font-weight:600;
-    color:rgba(20,33,61,0.5);
-  }
-  .team-intro .scroll-note svg{width:16px;height:16px;}
-
-  /* ---------- PAGED TEAM SECTIONS ---------- */
-  html{scroll-snap-type:y mandatory;}
-  .team-pager{position:relative;}
-  .person-page{
-    min-height:calc(100vh - var(--header-h));
-    scroll-snap-align:start;
-    scroll-margin-top:var(--header-h);
-    display:flex;align-items:center;
-    border-bottom:1px solid var(--line);
-    position:relative;
-  }
-  .person-page:nth-of-type(odd){background:#fff;}
-  .person-page:nth-of-type(even){background:var(--paper);}
-
-  .person-inner{
-    width:100%;padding:56px 0;
-    display:grid;grid-template-columns:0.85fr 1.15fr;gap:72px;align-items:center;
-  }
-  .photo-col{order:1;display:flex;justify-content:center;}
-  .bio-col{order:2;}
-  .person-page.reverse .photo-col{order:2;}
-  .person-page.reverse .bio-col{order:1;}
-
-  .photo-frame{
-    position:relative;width:100%;max-width:380px;aspect-ratio:4/5;
-    border-radius:6px;overflow:hidden;background:var(--navy);
-    box-shadow:16px 16px 0 rgba(79,179,217,0.16);
-  }
-  .photo-frame img{width:100%;height:100%;object-fit:cover;display:block;}
-  .photo-frame .initials-fallback{
-    position:absolute;inset:0;display:none;align-items:center;justify-content:center;
-    font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:3.6rem;color:var(--cyan);
-    background:var(--navy);
-  }
-  .photo-index{
-    position:absolute;top:-16px;left:-16px;width:46px;height:46px;border-radius:50%;
-    background:var(--flame);color:#fff;
-    font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:0.9rem;
+  /* ---------- TEAM ---------- */
+  .team{background:#fff;border-bottom:1px solid var(--line);}
+  .team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--line);border:1px solid var(--line);}
+  .team-card{background:#fff;padding:36px 32px;display:flex;flex-direction:column;gap:14px;}
+  .team-avatar{
+    position:relative;overflow:hidden;
+    width:96px;height:96px;border-radius:50%;
+    background:var(--navy);color:var(--cyan);
     display:flex;align-items:center;justify-content:center;
-    box-shadow:0 6px 14px rgba(11,29,58,0.22);
+    font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.3rem;
   }
-
-  .bio-col{max-width:54ch;}
-  .bio-col .role{
-    font-family:'Space Grotesk',sans-serif;font-weight:600;color:var(--flame);
-    font-size:0.9rem;letter-spacing:0.02em;margin:0 0 10px;
+  .team-avatar img{
+    position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
   }
-  .bio-col h2{margin:0 0 20px;font-size:clamp(1.9rem,3.4vw,2.6rem);}
-  .bio-col p.bio{color:rgba(20,33,61,0.78);font-size:1.06rem;margin:0 0 24px;}
-  .focus-tags{display:flex;flex-wrap:wrap;gap:8px;}
-  .focus-tags .tag{
-    font-size:0.82rem;color:rgba(20,33,61,0.72);
-    background:rgba(20,33,61,0.05);border:1px solid var(--line);
-    padding:5px 11px;border-radius:2px;
+  .team-card h3{font-size:1.2rem;margin:0;font-weight:600;}
+  .team-card .role{
+    font-family:'Space Grotesk',sans-serif;font-size:0.85rem;font-weight:600;
+    color:var(--flame);margin:-8px 0 0;
   }
-
-  .scroll-hint{
-    position:absolute;left:50%;bottom:22px;transform:translateX(-50%);
-    display:flex;flex-direction:column;align-items:center;gap:4px;
-    color:rgba(20,33,61,0.4);font-family:'Space Grotesk',sans-serif;
-    font-size:0.72rem;font-weight:600;letter-spacing:0.04em;
-    animation:bob 2s ease-in-out infinite;
-  }
-  .scroll-hint svg{width:16px;height:16px;}
-  @keyframes bob{0%,100%{transform:translate(-50%,0);}50%{transform:translate(-50%,6px);}}
-
-  /* ---------- PAGE DOTS ---------- */
-  .page-dots{
-    position:fixed;right:28px;top:50%;transform:translateY(-50%);
-    display:flex;flex-direction:column;align-items:center;gap:16px;z-index:40;
-  }
-  .page-dots button{
-    width:10px;height:10px;border-radius:50%;border:1.5px solid var(--ink);
-    background:transparent;padding:0;cursor:pointer;opacity:0.35;
-    transition:all .2s ease;
-  }
-  .page-dots button:hover{opacity:0.7;}
-  .page-dots button.active{background:var(--flame);border-color:var(--flame);opacity:1;transform:scale(1.35);}
+  .team-card p.bio{margin:0;color:rgba(20,33,61,0.72);font-size:0.98rem;}
 
   /* ---------- FOOTER ---------- */
-  footer{background:var(--navy-deep);color:rgba(245,242,234,0.7);padding:56px 0 28px;scroll-snap-align:none;}
+  footer{background:var(--navy-deep);color:rgba(245,242,234,0.7);padding:56px 0 28px;}
   .footer-grid{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:40px;margin-bottom:40px;}
   footer .brand{color:var(--paper);}
   footer h4{
@@ -258,19 +191,11 @@
     nav.links.open{transform:translateX(0);}
     .menu-toggle{display:block;}
     .hero-inner{padding:56px 0 64px;}
+    .team-grid{grid-template-columns:1fr;}
     .footer-grid{grid-template-columns:1fr;gap:28px;}
-
-    html{scroll-snap-type:none;}
-    .page-dots{display:none;}
-    .person-page{min-height:auto;scroll-snap-align:none;}
-    .person-inner{grid-template-columns:1fr;gap:36px;padding:64px 0;text-align:center;}
-    .photo-col{order:1 !important;}
-    .bio-col{order:2 !important;max-width:none;}
-    .bio-col h2{margin-top:8px;}
-    .focus-tags{justify-content:center;}
-    .photo-frame{margin:0 auto;box-shadow:10px 10px 0 rgba(79,179,217,0.16);}
-    .scroll-hint{display:none;}
+    section{padding:64px 0;}
   }
+
 </style>
 </head>
 <body>
@@ -278,13 +203,13 @@
 <header class="site">
   <div class="wrap nav">
     <a href="index.html" class="brand">
-      <img src="images/Logo.png" alt="FlightPath logo" style="width:72px;height:72px;object-fit:contain;">
-      FlightPath
+      <img src="images/Logo.png" alt="Flight Plan logo" style="width:72px;height:72px;object-fit:contain;">
+      Flight Plan
     </a>
     <nav class="links" id="navLinks">
       <a href="index.html#mission">Mission</a>
+      <a href="programs.html">Programs</a>
       <a href="team.html" style="opacity:1;font-weight:600;">Team</a>
-      <a href="programs.html">What we teach</a>
       <a class="icon-btn" href="calendar.html" aria-label="Calendar">
         <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="5" width="18" height="16" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M3 9.5H21" stroke="currentColor" stroke-width="1.6"/><path d="M8 3V6.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M16 3V6.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
       </a>
@@ -298,105 +223,58 @@
   <section class="hero">
     <div class="wrap hero-inner">
       <span class="eyebrow-tag">Our People</span>
-      <h1>The team behind FlightPath.</h1>
-      <p class="lede">FlightPath is run by a small core team dedicated to giving kids hands-on experience with aerospace and engineering.</p>
+      <h1>The team behind Flight Plan.</h1>
+      <p class="lede">Flight Plan is run by a small core team dedicated to giving kids hands-on experience with aerospace and engineering.</p>
     </div>
   </section>
 
-  <section class="team-intro">
+  <section class="team" id="team">
     <div class="wrap">
       <div class="section-head">
         <p class="kicker">Core team</p>
-        <h2>Three people keeping FlightPath flying</h2>
-        <p>Meet the core team leading FlightPath's day-to-day operations, curriculum, and volunteer program.</p>
-        <div class="scroll-note">
-          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 4V20M12 20L6 14M12 20L18 14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          Scroll or use Page Up / Page Down to move between people
+        <h2>Six people keeping Flight Plan flying</h2>
+        <p>Meet the core team leading Flight Plan's day-to-day operations, curriculum, and volunteer program.</p>
+      </div>
+      <div class="team-grid">
+        <div class="team-card">
+          <div class="team-avatar">T1<img src="images/team1.jpg" alt="Team Member One" onerror="this.remove()"></div>
+          <h3>Team Member One</h3>
+          <p class="role">Founder</p>
+          <p class="bio">Bio coming soon.</p>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar">T2<img src="images/team2.jpg" alt="Team Member Two" onerror="this.remove()"></div>
+          <h3>Team Member Two</h3>
+          <p class="role">Program Director</p>
+          <p class="bio">Bio coming soon.</p>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar">T3<img src="images/team3.jpg" alt="Team Member Three" onerror="this.remove()"></div>
+          <h3>Team Member Three</h3>
+          <p class="role">Curriculum Lead</p>
+          <p class="bio">Bio coming soon.</p>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar">T4<img src="images/team4.jpg" alt="Team Member Four" onerror="this.remove()"></div>
+          <h3>Team Member Four</h3>
+          <p class="role">Volunteer Coordinator</p>
+          <p class="bio">Bio coming soon.</p>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar">T5<img src="images/team5.jpg" alt="Team Member Five" onerror="this.remove()"></div>
+          <h3>Team Member Five</h3>
+          <p class="role">Outreach Lead</p>
+          <p class="bio">Bio coming soon.</p>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar">T6<img src="images/team6.jpg" alt="Team Member Six" onerror="this.remove()"></div>
+          <h3>Team Member Six</h3>
+          <p class="role">Operations Lead</p>
+          <p class="bio">Bio coming soon.</p>
         </div>
       </div>
     </div>
   </section>
-
-  <div class="team-pager" id="teamPager">
-
-    <section class="person-page">
-      <div class="wrap person-inner">
-        <div class="photo-col">
-          <div class="photo-frame">
-            <span class="photo-index">01</span>
-            <img src="images/team 1.jpg" alt="Team Member One" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-            <span class="initials-fallback">T1</span>
-          </div>
-        </div>
-        <div class="bio-col">
-          <p class="role">Co-founder</p>
-          <h2>Shreyam Sanghvi</h2>
-          <p class="bio">High School Student | Passionate about aviation and aerospace engineering | Competed at TSA State and National Conferences | Participated in FIRST Robotics Competition | Built and flown RC planes | Constructed rockets | Logged flight hours in several different aircraft</p>
-          <div class="focus-tags">
-            <span class="tag">Leadership</span>
-            <span class="tag">Mentor</span>
-          </div>
-        </div>
-      </div>
-      <div class="scroll-hint">
-        <span>NEXT</span>
-        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 4V20M12 20L6 14M12 20L18 14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </div>
-    </section>
-
-    <section class="person-page reverse">
-      <div class="wrap person-inner">
-        <div class="photo-col">
-          <div class="photo-frame">
-            <span class="photo-index">02</span>
-            <img src="images/team 2.jpg" alt="Team Member Two" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-            <span class="initials-fallback">T2</span>
-          </div>
-        </div>
-        <div class="bio-col">
-          <p class="role">Co-founder</p>
-          <h2>Yugaan Chugh</h2>
-          <p class="bio">High School Student | Aspiring Aerospace Engineer | Student Pilot Pursuing Private Pilot License | Python & C++ & MATlabs| 3D Modeling & Printing | Built & Flown RC planes | Build & Fly FPV Drones | Competed at TSA State and National Conferences | Participant in Teen Aviation of New Jersey</p>
-          <div class="focus-tags">
-            <span class="tag">Leadership</span>
-            <span class="tag">Mentor</span>
-          </div>
-        </div>
-      </div>
-      <div class="scroll-hint">
-        <span>NEXT</span>
-        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 4V20M12 20L6 14M12 20L18 14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </div>
-    </section>
-
-    <section class="person-page">
-      <div class="wrap person-inner">
-        <div class="photo-col">
-          <div class="photo-frame">
-            <span class="photo-index">03</span>
-            <img src="images/team 3.jpg" alt="Team Member Three" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-            <span class="initials-fallback">T3</span>
-          </div>
-        </div>
-        <div class="bio-col">
-          <p class="role">Co-founder</p>
-          <h2>Rafael Louis</h2>
-          <p class="bio">High school student | Aspiring airline pilot | aerospace and aviation club | Built model aircrafts | passionate aviator</p>
-          <div class="focus-tags">
-            <span class="tag">Leadership</span>
-            <span class="tag">Mentor</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-  </div>
-
-  <div class="page-dots" id="pageDots">
-    <button data-target="0" aria-label="Team member 1"></button>
-    <button data-target="1" aria-label="Team member 2"></button>
-    <button data-target="2" aria-label="Team member 3"></button>
-  </div>
 </main>
 
 <footer>
@@ -404,8 +282,8 @@
     <div class="footer-grid">
       <div>
         <a href="index.html" class="brand" style="margin-bottom:14px;">
-          <img src="images/Logo.png" alt="FlightPath logo" style="width:72px;height:72px;object-fit:contain;">
-          FlightPath
+          <img src="images/Logo.png" alt="Flight Plan logo" style="width:72px;height:72px;object-fit:contain;">
+          Flight Plan
         </a>
         <p style="max-width:32ch;font-size:0.92rem;">A nonprofit teaching kids aerospace and engineering through hands-on building, one launch at a time.</p>
       </div>
@@ -413,20 +291,20 @@
         <h4>Explore</h4>
         <ul>
           <li><a href="index.html#mission">Mission</a></li>
+          <li><a href="programs.html">Programs</a></li>
           <li><a href="team.html">Team</a></li>
-          <li><a href="programs.html">What we teach</a></li>
         </ul>
       </div>
       <div>
         <h4>Contact</h4>
         <ul>
-          <li><a href="mailto:support@flightpath4u.com">support@flightpath4u.com</a></li>
-          <li>Monroe Township, NJ</li>
+          <li><a href="mailto:hello@flightplankids.org">hello@flightplankids.org</a></li>
+          <li>Portland, OR</li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
-      <span>© 2026 FlightPath. All rights reserved.</span>
+      <span>© 2026 Flight Plan. All rights reserved.</span>
       <span>EIN 00-0000000</span>
     </div>
   </div>
@@ -442,38 +320,6 @@
   links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => links.classList.remove('open')));
 
   FP.renderNavAuth('navAuth');
-
-  // Keep the "page" heights accurate under the sticky header, whatever its real height is.
-  function setHeaderHeightVar() {
-    const header = document.querySelector('header.site');
-    if (header) document.documentElement.style.setProperty('--header-h', header.offsetHeight + 'px');
-  }
-  window.addEventListener('resize', setHeaderHeightVar);
-  setHeaderHeightVar();
-
-  // Page dots: highlight the person currently in view, and jump to a person on click.
-  const personPages = Array.from(document.querySelectorAll('.person-page'));
-  const dots = Array.from(document.querySelectorAll('.page-dots button'));
-
-  dots.forEach(dot => {
-    dot.addEventListener('click', () => {
-      const target = personPages[Number(dot.dataset.target)];
-      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    });
-  });
-
-  if ('IntersectionObserver' in window) {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const idx = personPages.indexOf(entry.target);
-          dots.forEach(d => d.classList.remove('active'));
-          if (dots[idx]) dots[idx].classList.add('active');
-        }
-      });
-    }, { threshold: 0.55 });
-    personPages.forEach(p => observer.observe(p));
-  }
 </script>
 
 </body>
