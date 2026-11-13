@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="images/Logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800;900&family=Barlow:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/arena.css">
+<title>Flight Community — Flight Path</title>
+<meta name="description" content="The Flight Community: meetups and ways to get involved with Flight Path.">
+</head>
+<body>
+
+<header>
+  <div class="wrap bar">
+    <a href="#top" class="brand">
+      <img src="images/Logo.png" alt="Flight Path logo">
+      <span>Flight <b>Community</b></span>
+    </a>
+    <nav class="menu">
+      <a href="#meetups">Meetups</a>
+      <a href="#involved">Get involved</a>
+      <a href="#join">Join</a>
+    </nav>
+    <div class="bar-right">
+      <a href="index.html" class="btn-path">← Flight Path</a>
+      <div class="auth" id="fcAuth"><a href="login.html">Login</a></div>
+    </div>
+  </div>
+</header>
+
+<div class="off-banner" id="offBanner" hidden>Flight Community is turned off, so only admins can see this page. Turn it back on from the admin page.</div>
+
+<main id="top">
+
+  <section class="hero">
+    <div class="beam b1"></div>
+    <div class="beam b2"></div>
+    <svg class="skyline" id="skyline" preserveAspectRatio="none" viewBox="0 0 1200 200" aria-hidden="true"></svg>
+    <div class="wrap hero-grid">
+      <div>
+        <p class="label">The Flight Path community</p>
+        <h1><span>Fly</span><span class="r">together.</span></h1>
+        <div class="next-up" id="nextUp">
+          <div class="t" id="nextUpTitle"></div>
+          <div class="s" id="nextUpSub"></div>
+        </div>
+        <p class="lede">A place for students, parents, volunteers, and friends of Flight Path to meet up, share what they're building, and learn from each other.</p>
+        <div class="hero-ctas">
+          <a class="btn btn-red" href="mailto:support@flightpath4u.com?subject=Flight%20Community">Join the community</a>
+          <a class="btn btn-line" href="#meetups">See meetups</a>
+        </div>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <div class="ghost">JOIN</div>
+        <svg viewBox="0 0 400 420" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <g stroke="#FF2A3D" stroke-width="3.5" stroke-linecap="round" stroke-dasharray="2 12" class="mesh">
+            <path d="M80 330 L190 250"/>
+            <path d="M190 250 L300 320"/>
+            <path d="M190 250 L130 140"/>
+            <path d="M190 250 L280 130"/>
+            <path d="M130 140 L280 130"/>
+            <path d="M280 130 L335 60"/>
+          </g>
+          <g fill="#4FB3D9">
+            <circle cx="80" cy="330" r="10"/>
+            <circle cx="190" cy="250" r="13"/>
+            <circle cx="300" cy="320" r="10"/>
+            <circle cx="130" cy="140" r="9"/>
+            <circle cx="280" cy="130" r="11"/>
+          </g>
+          <path d="M0 0 L-34 12 L-12 14 L-7 32 L7 16 L34 -8 Z" fill="#F4F6FB" transform="translate(340 56) rotate(-18)"/>
+          <g font-family="IBM Plex Mono, monospace" font-size="13" fill="#F4F6FB" opacity=".85">
+            <text x="30" y="358">STUDENTS</text>
+            <text x="262" y="350">PARENTS</text>
+            <text x="60" y="124">VOLUNTEERS</text>
+          </g>
+        </svg>
+      </div>
+    </div>
+    <div class="hero-foot">
+      <div class="wrap">
+        <span class="mono">Monroe Township Library</span>
+        <span class="mono">Grades 1–5 · Taught by high schoolers</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="upcoming" id="meetups">
+    <div class="wrap">
+      <div class="up-head">
+        <p class="label">Upcoming meetups</p>
+        <div class="arrows">
+          <button type="button" id="stripPrev" aria-label="Scroll left">‹</button>
+          <button type="button" id="stripNext" aria-label="Scroll right">›</button>
+        </div>
+      </div>
+      <div class="strip" id="strip">
+        <article class="race empty"><h3>Loading…</h3></article>
+      </div>
+
+      <div class="admin-box" id="adminBox" hidden>
+        <p class="label">Admin</p>
+        <h3>Add a meetup</h3>
+        <div id="compMsg"></div>
+        <form id="compForm">
+          <div class="grid2">
+            <div class="fld"><label for="cName">Name</label><input type="text" id="cName" required></div>
+            <div class="fld"><label for="cDate">Date</label><input type="date" id="cDate" required></div>
+          </div>
+          <div class="grid2">
+            <div class="fld"><label for="cLoc">Location</label><input type="text" id="cLoc" placeholder="e.g. Monroe Township Library"></div>
+            <div class="fld"><label for="cLink">Link (optional)</label><input type="url" id="cLink" placeholder="https://…"></div>
+          </div>
+          <div class="fld"><label for="cDesc">Description</label><textarea id="cDesc" placeholder="What is this meetup about?"></textarea></div>
+          <button type="submit" class="btn btn-red">Add meetup</button>
+        </form>
+        <div class="manage">
+          <p class="label">All meetups</p>
+          <div id="compManage"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="features" id="involved">
+    <div class="wrap">
+      <div class="trio">
+        <article class="feat f1">
+          <span class="bignum">01</span>
+          <span class="tag">For students</span>
+          <h3>Share what you build</h3>
+          <p>Show off your latest project, swap ideas with other young engineers, and get inspired for the next build.</p>
+        </article>
+        <article class="feat f2">
+          <span class="bignum">02</span>
+          <span class="tag">For parents</span>
+          <h3>Stay in the loop</h3>
+          <p>See what's coming up and meet the other families.</p>
+        </article>
+        <article class="feat f3">
+          <span class="bignum">03</span>
+          <span class="tag">For volunteers</span>
+          <h3>Help teach</h3>
+          <p>Join the high schoolers who design and teach every session.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="community" id="join">
+    <div class="wrap com-grid">
+      <div>
+        <p class="label">Built by high schoolers · open to everyone</p>
+        <h2>One community,<br>many<br><span class="red">launches.</span></h2>
+        <p>Flight Path is more than a class. It's families, volunteers, and curious kids who share a love of aerospace and engineering, and the Flight Community is where they come together.</p>
+        <div class="hero-ctas">
+          <a class="btn btn-red" href="mailto:support@flightpath4u.com?subject=Flight%20Community">Join the community</a>
+          <a class="btn btn-line" href="mailto:support@flightpath4u.com?subject=Flight%20Community%20question">Ask a question</a>
+        </div>
+      </div>
+      <div class="logo-stage" aria-hidden="true">
+        <div class="ring"></div>
+        <img src="images/Logo.png" alt="">
+      </div>
+    </div>
+  </section>
+
+  <section class="getflying">
+    <div class="wrap gf-grid">
+      <h2>Everything you<br>need to <span class="red">get involved.</span></h2>
+      <div class="gf-block">
+        <p class="label">Families</p>
+        <h3>See what's coming up</h3>
+        <p>Browse the next meetups and mark your calendar.</p>
+        <a href="#meetups">Browse meetups →</a>
+      </div>
+      <div class="gf-block">
+        <p class="label">Volunteers</p>
+        <h3>Lend a hand</h3>
+        <p>Want to help teach or organize? We'd love to hear from you.</p>
+        <a href="mailto:support@flightpath4u.com?subject=Volunteer%20with%20Flight%20Path">Email us →</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<section class="closed" id="closedView" hidden>
+  <div>
+    <p class="label">Flight Community</p>
+    <h1>Hangar <span class="red">closed.</span></h1>
+    <p class="sub">The Flight Community isn't open right now. Check back soon.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap row">
+    <span class="mono">© 2026 Flight Path · Flight Community</span>
+    <span class="mono">Monroe Township, NJ</span>
+    <a class="mono" href="mailto:support@flightpath4u.com">support@flightpath4u.com</a>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="assets/supabase-config.js"></script>
+<script src="assets/app.js"></script>
+<script>
+  // ---- skyline silhouette (decorative) ----
+  (function () {
+    const svg = document.getElementById('skyline');
+    let seed = 11, x = 0, out = '';
+    const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+    while (x < 1200) {
+      const w = 22 + rnd() * 44, h = 40 + rnd() * 150;
+      out += '<rect x="' + x.toFixed(1) + '" y="' + (200 - h).toFixed(1) + '" width="' + w.toFixed(1) +
+             '" height="' + h.toFixed(1) + '" fill="rgba(79,179,217,0.07)"/>';
+      if (rnd() > 0.65) out += '<rect x="' + (x + w / 2 - 1).toFixed(1) + '" y="' + (200 - h - 14).toFixed(1) +
+             '" width="2" height="14" fill="rgba(255,42,61,0.55)"/>';
+      x += w + 3 + rnd() * 5;
+    }
+    svg.innerHTML = out;
+  })();
+
+  // ---- helpers ----
+  const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g,
+    c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  const pad = n => String(n).padStart(2, '0');
+  const t = new Date();
+  const todayKey = t.getFullYear() + '-' + pad(t.getMonth() + 1) + '-' + pad(t.getDate());
+  const parse = d => new Date(d + 'T00:00:00');
+  const safeUrl = u => /^https?:\/\//i.test(u || '') ? u : '';
+
+  let isAdmin = false;
+  let meetups = [];
+
+  // ---- render ----
+  function renderStrip() {
+    const strip = document.getElementById('strip');
+    const upcoming = meetups.filter(c => c.date >= todayKey).sort((a, b) => a.date.localeCompare(b.date));
+
+    if (!upcoming.length) {
+      strip.innerHTML = '<article class="race empty"><h3>No meetups posted yet</h3>' +
+        '<p class="desc">Check back soon. New Flight Community meetups will show up here.</p></article>';
+    } else {
+      strip.innerHTML = upcoming.map(c => {
+        const d = parse(c.date);
+        const url = safeUrl(c.link);
+        return '<article class="race">' +
+          '<div class="date"><b>' + d.getDate() + '</b><span>' + esc(d.toLocaleDateString('en-US', { month: 'short' })) + '</span></div>' +
+          '<h3>' + esc(c.name) + '</h3>' +
+          (c.location ? '<p class="loc">' + esc(c.location) + '</p>' : '') +
+          (c.description ? '<p class="desc">' + esc(c.description) + '</p>' : '') +
+          (url ? '<a class="go" href="' + esc(url) + '" target="_blank" rel="noopener">Details →</a>' : '') +
+          '</article>';
+      }).join('');
+    }
+
+    const box = document.getElementById('nextUp');
+    if (upcoming.length) {
+      const n = upcoming[0];
+      document.getElementById('nextUpTitle').textContent = 'Next up: ' + n.name;
+      document.getElementById('nextUpSub').textContent =
+        parse(n.date).toLocaleDateString(undefined, { weekday: 'long', month: 'long', day: 'numeric' }) +
+        (n.location ? ' · ' + n.location : '');
+      box.classList.add('show');
+    } else {
+      box.classList.remove('show');
+    }
+  }
+
+  function renderManage() {
+    if (!isAdmin) return;
+    const box = document.getElementById('compManage');
+    const sorted = meetups.slice().sort((a, b) => a.date.localeCompare(b.date));
+    if (!sorted.length) {
+      box.innerHTML = '<p style="color:var(--muted);margin:0;">Nothing yet. Add your first meetup above.</p>';
+      return;
+    }
+    box.innerHTML = sorted.map(c =>
+      '<div class="manage-row"><div><b>' + esc(c.name) + '</b><br><span>' +
+      esc(parse(c.date).toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' })) +
+      (c.location ? ' · ' + esc(c.location) : '') +
+      (c.date < todayKey ? ' · past' : '') + '</span></div>' +
+      '<button class="btn btn-del" data-del="' + esc(c.id) + '">Delete</button></div>'
+    ).join('');
+    box.querySelectorAll('[data-del]').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        if (!confirm('Delete this meetup?')) return;
+        const r = await FP.deleteMeetup(btn.dataset.del);
+        if (!r.ok) { showMsg(r.error, 'err'); return; }
+        load();
+      });
+    });
+  }
+
+  function showMsg(text, kind) {
+    let m = esc(text);
+    if (/relation|schema cache|does not exist/i.test(text)) {
+      m += ' — run features-and-community.sql in your Supabase SQL Editor first.';
+    }
+    document.getElementById('compMsg').innerHTML = '<div class="msg ' + kind + '">' + m + '</div>';
+  }
+
+  async function load() {
+    try { meetups = await FP.getMeetups(); } catch (e) { meetups = []; }
+    renderStrip();
+    renderManage();
+  }
+
+  // ---- strip arrows ----
+  document.getElementById('stripPrev').addEventListener('click', () =>
+    document.getElementById('strip').scrollBy({ left: -320, behavior: 'smooth' }));
+  document.getElementById('stripNext').addEventListener('click', () =>
+    document.getElementById('strip').scrollBy({ left: 320, behavior: 'smooth' }));
+
+  // ---- admin form ----
+  document.getElementById('compForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const link = document.getElementById('cLink').value.trim();
+    if (link && !safeUrl(link)) { showMsg('The link must start with http:// or https://', 'err'); return; }
+    const r = await FP.addMeetup({
+      name: document.getElementById('cName').value.trim(),
+      date: document.getElementById('cDate').value,
+      location: document.getElementById('cLoc').value.trim(),
+      description: document.getElementById('cDesc').value.trim(),
+      link
+    });
+    if (!r.ok) { showMsg(r.error, 'err'); return; }
+    document.getElementById('compForm').reset();
+    showMsg('Meetup added.', 'ok');
+    load();
+  });
+
+  // ---- auth + startup ----
+  (async () => {
+    try {
+      const s = await FP.getSession();
+      if (s) {
+        const box = document.getElementById('fcAuth');
+        box.innerHTML = '';
+        const who = document.createElement('span');
+        who.className = 'who';
+        who.textContent = s.username;
+        const out = document.createElement('a');
+        out.href = '#';
+        out.textContent = 'Log out';
+        out.addEventListener('click', async (ev) => {
+          ev.preventDefault();
+          await FP.logout();
+          window.location.reload();
+        });
+        box.appendChild(who);
+        box.appendChild(out);
+        isAdmin = s.role === 'admin';
+        if (isAdmin) document.getElementById('adminBox').hidden = false;
+      }
+    } catch (e) { /* leave the default Login link */ }
+
+    // Flight Community on/off (set from the admin page)
+    try {
+      const st = await FP.getSettings();
+      if (!st.community_enabled) {
+        if (isAdmin) {
+          document.getElementById('offBanner').hidden = false;
+        } else {
+          document.getElementById('top').hidden = true;
+          document.getElementById('closedView').hidden = false;
+          return;
+        }
+      }
+    } catch (e) { /* if the setting can't be read, leave the page open */ }
+    load();
+  })();
+</script>
+
+</body>
+</html>
