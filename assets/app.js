@@ -1,5 +1,5 @@
 /*
-  FlightPath — data layer (Supabase-backed)
+  Flight Path — data layer (Supabase-backed)
   -------------------------------------------
   Every page loads, in order:
     1. the Supabase client library (CDN)
@@ -143,25 +143,17 @@ const FP = (() => {
     return error ? { ok: false, error: error.message } : { ok: true };
   }
 
-  // ---- curriculum items ("What we teach" page) ----
-  async function getCurriculumItems() {
-    const { data, error } = await sb.from('curriculum_items').select('*').order('sort_order').order('created_at');
+  // ---- competitions (Flight Challenge page) ----
+  async function getCompetitions() {
+    const { data, error } = await sb.from('competitions').select('*').order('date');
     return error ? [] : data;
   }
-  async function addCurriculumItem({ kind, title, tags, eventDate, link }) {
-    const { error } = await sb.from('curriculum_items').insert({
-      kind, title, tags: tags || '', event_date: eventDate || null, link: link || null
-    });
+  async function addCompetition({ name, date, location, description, link }) {
+    const { error } = await sb.from('competitions').insert({ name, date, location, description, link });
     return error ? { ok: false, error: error.message } : { ok: true };
   }
-  async function updateCurriculumItem(id, { kind, title, tags, eventDate, link }) {
-    const { error } = await sb.from('curriculum_items').update({
-      kind, title, tags: tags || '', event_date: eventDate || null, link: link || null
-    }).eq('id', id);
-    return error ? { ok: false, error: error.message } : { ok: true };
-  }
-  async function deleteCurriculumItem(id) {
-    const { error } = await sb.from('curriculum_items').delete().eq('id', id);
+  async function deleteCompetition(id) {
+    const { error } = await sb.from('competitions').delete().eq('id', id);
     return error ? { ok: false, error: error.message } : { ok: true };
   }
 
@@ -170,6 +162,6 @@ const FP = (() => {
     getClasses, addClass, deleteClass,
     getSlots, addSlot, deleteSlot, bookSlot, cancelBooking,
     getEvents, addEvent, deleteEvent,
-    getCurriculumItems, addCurriculumItem, updateCurriculumItem, deleteCurriculumItem
+    getCompetitions, addCompetition, deleteCompetition
   };
 })();
